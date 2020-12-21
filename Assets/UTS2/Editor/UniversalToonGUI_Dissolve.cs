@@ -452,7 +452,7 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
             offset_Y_Axis_BLD = FindProperty("_Offset_Y_Axis_BLD", props);
 
 			//VacuumShaders
-			//VacuumShaders.AdvancedDissolve.MaterialProperties.Init(props);
+			VacuumShaders.AdvancedDissolve.MaterialProperties.Init(props);
 		}
         // --------------------------------
 
@@ -1025,10 +1025,10 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
             }
             EditorGUILayout.EndHorizontal();
 
-
-
             m_MaterialEditor.RangeProperty(clipping_Level, "Clipping Level");
-        }
+
+			VacuumShaders.AdvancedDissolve.MaterialProperties.DrawDissolveOptions(m_MaterialEditor, true, false);
+		}
 
         void GUI_SetTransparencySetting(Material material)
         {
