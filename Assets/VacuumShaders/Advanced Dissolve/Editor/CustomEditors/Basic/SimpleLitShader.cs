@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityEditor.Rendering.Universal.ShaderGUI
 {
-    internal class AdvancedDisolve_SimpleLitShader : BaseShaderGUI
+    public class AdvancedDisolve_SimpleLitShader : BaseShaderGUI
     {
         // Properties
         private SimpleLitGUI.SimpleLitProperties shadingModelProperties;

@@ -1,14 +1,12 @@
 {
     "name": "Unity.UniversalToonShader.Urp.Editor",
-    "references": [
-        "Unity.UniversalToonShader.Urp"
-    ],
+    "references": [],
     "includePlatforms": [
         "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
+    "overrideReferences": true,
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
