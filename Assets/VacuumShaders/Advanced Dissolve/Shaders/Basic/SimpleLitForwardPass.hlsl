@@ -128,12 +128,12 @@ half4 LitPassFragmentSimple(Varyings input) : SV_Target
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
 
-float4 dissolaveAlpha = AdvancedDissolveGetAlpha(input.uv.xy, input.posWS.xyz, input.normal, input.dissolveUV);
-DoDissolveClip(dissolaveAlpha); 
+	float4 dissolaveAlpha = AdvancedDissolveGetAlpha(input.uv.xy, input.posWS.xyz, input.normal, input.dissolveUV);
+	DoDissolveClip(dissolaveAlpha); 
 
-float3 dissolveAlbedo = 0;
-float3 dissolveEmission = 0;
-float dissolveBlend = DoDissolveAlbedoEmission(dissolaveAlpha, dissolveAlbedo, dissolveEmission, input.uv.xy, 1);
+	float3 dissolveAlbedo = 0;
+	float3 dissolveEmission = 0;
+	float dissolveBlend = DoDissolveAlbedoEmission(dissolaveAlpha, dissolveAlbedo, dissolveEmission, input.uv.xy, 1);
 
 
 

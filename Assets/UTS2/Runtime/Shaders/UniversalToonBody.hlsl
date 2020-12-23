@@ -264,6 +264,7 @@
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 
             };
+
             struct VertexOutput {
                 float4 pos : SV_POSITION;
                 float2 uv0 : TEXCOORD0;

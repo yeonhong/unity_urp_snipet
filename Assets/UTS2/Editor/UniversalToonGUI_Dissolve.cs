@@ -109,7 +109,7 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 
         public enum _UTS_ClippingMode
         {
-            Off, On, TransClippingMode
+            Off, On
         }
 
         public enum _UTS_TransClippingMode
@@ -369,10 +369,10 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
             //シェーダーによって無い可能性があるプロパティはfalseを追加.
             utsTechnique = FindProperty(ShaderPropUtsTechniqe, props);
             transparentMode = FindProperty(ShaderPropTransparentEnabled, props);
-            clippingMask = FindProperty(ShaderPropClippingMask, props);
-            clippingMode = FindProperty(ShaderPropClippingMode, props);
-            clipping_Level = FindProperty("_Clipping_Level", props, false);
-            tweak_transparency = FindProperty("_Tweak_transparency", props, false);
+			clippingMode = FindProperty(ShaderPropClippingMode, props);
+			//clippingMask = FindProperty(ShaderPropClippingMask, props);
+			//clipping_Level = FindProperty("_Clipping_Level", props, false);
+			tweak_transparency = FindProperty("_Tweak_transparency", props, false);
             stencilMode = FindProperty(ShaderPropStencilMode, props);
             mainTex = FindProperty("_MainTex", props);
             baseColor = FindProperty("_BaseColor", props);
@@ -651,7 +651,7 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
                 if (IsClippingMaskPropertyAvailable(technique))
                 {
                     GUI_SetClippingMask(material);
-                    GUI_SetTransparencySetting(material);
+                    //GUI_SetTransparencySetting(material);
                 }
 
                 GUI_OptionMenu(material);
@@ -966,15 +966,15 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 
             if (_Transparent_Setting == _UTS_Transparent.On)
             {
-                if ( material.GetInt(ShaderPropUtsTechniqe) == (int)_UTS_Technique.DoubleShadeWithFeather )
-                {
-                    material.SetInt(ShaderPropClippingMode, (int)_UTS_ClippingMode.TransClippingMode);
-                }
-                else
-                {
-                    // ShadingGradeMap
-                    material.SetInt(ShaderPropClippingMode, (int)_UTS_TransClippingMode.On);
-                }
+                //if ( material.GetInt(ShaderPropUtsTechniqe) == (int)_UTS_Technique.DoubleShadeWithFeather )
+                //{
+                //    material.SetInt(ShaderPropClippingMode, (int)_UTS_ClippingMode.TransClippingMode);
+                //}
+                //else
+                //{
+                //    // ShadingGradeMap
+                //    material.SetInt(ShaderPropClippingMode, (int)_UTS_TransClippingMode.On);
+                //}
                 material.SetInt(_ZWriteMode, 0);
                 material.SetFloat(_ZOverDrawMode, 1);
             }
@@ -1004,35 +1004,11 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
         void GUI_SetClippingMask(Material material)
         {
             GUILayout.Label("Options for Clipping or TransClipping features", EditorStyles.boldLabel);
-            m_MaterialEditor.TexturePropertySingleLine(Styles.clippingMaskText, clippingMask);
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PrefixLabel("Inverse Clipping Mask");
-
-			if (material.GetFloat(ShaderPropInverseClipping) == 0)
-            {
-                if (GUILayout.Button(STR_OFFSTATE, shortButtonStyle))
-                {
-                    material.SetFloat(ShaderPropInverseClipping, 1);
-                }
-            }
-            else
-            {
-                if (GUILayout.Button(STR_ONSTATE, shortButtonStyle))
-                {
-                    material.SetFloat(ShaderPropInverseClipping, 0);
-                }
-            }
-            EditorGUILayout.EndHorizontal();
-
-            m_MaterialEditor.RangeProperty(clipping_Level, "Clipping Level");
-
 			VacuumShaders.AdvancedDissolve.MaterialProperties.DrawDissolveOptions(m_MaterialEditor, true, false);
 		}
 
         void GUI_SetTransparencySetting(Material material)
         {
-
             GUILayout.Label("Options for TransClipping or Transparent features", EditorStyles.boldLabel);
             m_MaterialEditor.RangeProperty(tweak_transparency, "Transparency Level");
 

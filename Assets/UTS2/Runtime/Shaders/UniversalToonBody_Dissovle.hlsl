@@ -154,22 +154,7 @@
             uniform float _Offset_X_Axis_BLD;
             uniform float _Offset_Y_Axis_BLD;
             uniform fixed _Inverse_Z_Axis_BLD;
-//v.2.0.4
-#ifdef _IS_CLIPPING_MODE
-//DoubleShadeWithFeather_Clipping
-            uniform sampler2D _ClippingMask; uniform float4 _ClippingMask_ST;
-            uniform float _Clipping_Level;
-            uniform fixed _Inverse_Clipping;
-#elif defined(_IS_CLIPPING_TRANSMODE) || defined(_IS_TRANSCLIPPING_ON)
-//DoubleShadeWithFeather_TransClipping
-            uniform sampler2D _ClippingMask; uniform float4 _ClippingMask_ST;
-            uniform fixed _IsBaseMapAlphaAsClippingMask;
-            uniform float _Clipping_Level;
-            uniform fixed _Inverse_Clipping;
-            uniform float _Tweak_transparency;
-#elif defined(_IS_CLIPPING_OFF) || defined(_IS_TRANSCLIPPING_OFF)
-//DoubleShadeWithFeather
-#endif
+
             // RaytracedHardShadow
 #define UNITY_PROJ_COORD(a) a
 #define UNITY_SAMPLE_SCREEN_SHADOW(tex, uv) tex2Dproj( tex, UNITY_PROJ_COORD(uv) ).r
@@ -254,66 +239,71 @@
                 float4 tangent : TANGENT;
                 float2 texcoord0 : TEXCOORD0;
 
-
-#ifdef _IS_ANGELRING_OFF
+			#ifdef _IS_ANGELRING_OFF
 				float2 lightmapUV   : TEXCOORD1;
-#elif _IS_ANGELRING_ON
-                float2 texcoord1 : TEXCOORD1;
+			#elif _IS_ANGELRING_ON
+				float2 texcoord1 : TEXCOORD1;
 				float2 lightmapUV   : TEXCOORD2;
-#endif
+			#endif
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 
-            };
-            struct VertexOutput {
-                float4 pos : SV_POSITION;
-                float2 uv0 : TEXCOORD0;
-//v.2.0.4
+			};
+
+			struct VertexOutput {
+					float4 pos : SV_POSITION;
+					float2 uv0 : TEXCOORD0;
+	//v.2.0.4
 #ifdef _IS_ANGELRING_OFF
-                float4 posWorld : TEXCOORD1;
-                float3 normalDir : TEXCOORD2;
-                float3 tangentDir : TEXCOORD3;
-                float3 bitangentDir : TEXCOORD4;
-                //v.2.0.7
-                float mirrorFlag : TEXCOORD5;
+					float4 posWorld : TEXCOORD1;
+					float3 normalDir : TEXCOORD2;
+					float3 tangentDir : TEXCOORD3;
+					float3 bitangentDir : TEXCOORD4;
+					
+					ADVANCED_DISSOLVE_DATA(5)
 
-				DECLARE_LIGHTMAP_OR_SH(lightmapUV, vertexSH, 6);
-				half4 fogFactorAndVertexLight   : TEXCOORD7; // x: fogFactor, yzw: vertex light
-# ifndef _MAIN_LIGHT_SHADOWS
-				float4 positionCS               : TEXCOORD8;
-                int   mainLightID              : TEXCOORD9;
-# else
-				float4 shadowCoord              : TEXCOORD8;
-				float4 positionCS               : TEXCOORD9;
-                int   mainLightID              : TEXCOORD10;
-# endif
-				UNITY_VERTEX_INPUT_INSTANCE_ID
-				UNITY_VERTEX_OUTPUT_STEREO
+					DECLARE_LIGHTMAP_OR_SH(lightmapUV, vertexSH, 6);
+					half4 fogFactorAndVertexLight   : TEXCOORD7; // x: fogFactor, yzw: vertex light
+
+				#ifndef _MAIN_LIGHT_SHADOWS
+					float4 positionCS               : TEXCOORD8;
+					int   mainLightID				: TEXCOORD9;
+					//v.2.0.7
+					float mirrorFlag : TEXCOORD10;
+				#else
+					float4 shadowCoord              : TEXCOORD8;
+					float4 positionCS               : TEXCOORD9;
+					int   mainLightID				: TEXCOORD10;
+					//v.2.0.7
+					float mirrorFlag : TEXCOORD11;
+				#endif
+					UNITY_VERTEX_INPUT_INSTANCE_ID
+					UNITY_VERTEX_OUTPUT_STEREO
 
                 //
 #elif _IS_ANGELRING_ON
-                float2 uv1 : TEXCOORD1;
-                float4 posWorld : TEXCOORD2;
-                float3 normalDir : TEXCOORD3;
-                float3 tangentDir : TEXCOORD4;
-                float3 bitangentDir : TEXCOORD5;
-                //v.2.0.7
-                float mirrorFlag : TEXCOORD6;
+					float2 uv1 : TEXCOORD1;
+					float4 posWorld : TEXCOORD2;
+					float3 normalDir : TEXCOORD3;
+					float3 tangentDir : TEXCOORD4;
+					float3 bitangentDir : TEXCOORD5;
+					//v.2.0.7
+					float mirrorFlag : TEXCOORD6;
 
-                DECLARE_LIGHTMAP_OR_SH(lightmapUV, vertexSH, 7);
-                half4 fogFactorAndVertexLight   : TEXCOORD8; // x: fogFactor, yzw: vertex light
-# ifndef _MAIN_LIGHT_SHADOWS
-                float4 positionCS               : TEXCOORD9;
-                int   mainLightID              : TEXCOORD10;
-# else
-                float4 shadowCoord              : TEXCOORD9;
-                float4 positionCS               : TEXCOORD10;
-                int   mainLightID              : TEXCOORD11;
-# endif
-                UNITY_VERTEX_INPUT_INSTANCE_ID
-                UNITY_VERTEX_OUTPUT_STEREO
+					DECLARE_LIGHTMAP_OR_SH(lightmapUV, vertexSH, 7);
+					half4 fogFactorAndVertexLight   : TEXCOORD8; // x: fogFactor, yzw: vertex light
+	# ifndef _MAIN_LIGHT_SHADOWS
+					float4 positionCS               : TEXCOORD9;
+					int   mainLightID              : TEXCOORD10;
+	# else
+					float4 shadowCoord              : TEXCOORD9;
+					float4 positionCS               : TEXCOORD10;
+					int   mainLightID              : TEXCOORD11;
+	# endif
+					UNITY_VERTEX_INPUT_INSTANCE_ID
+					UNITY_VERTEX_OUTPUT_STEREO
 #else
-                LIGHTING_COORDS(7,8)
-                UNITY_FOG_COORDS(9)
+					LIGHTING_COORDS(7,8)
+					UNITY_FOG_COORDS(9)
 #endif
                 //
 
@@ -517,6 +507,7 @@
                 }
                 return GetAdditionalUtsLight(index, posW, positionCS);
             }
+
             VertexOutput vert (VertexInput v) {
                 VertexOutput o = (VertexOutput)0;
 
@@ -563,20 +554,19 @@
                 o.mainLightID = DetermineUTS_MainLightIndex(o.posWorld, 0, positionCS);
   #endif
 
-		
+			#ifdef _IS_CLIPPING_MODE
+				ADVANCED_DISSOLVE_INIT_DATA(positionCS, v.texcoord0.xy, v.lightmapUV.xy, o);
+			#endif
+
                 return o;
             }
 
 
 
 #if defined(_SHADINGGRADEMAP)
-
 #include "UniversalToonBodyShadingGradeMap.hlsl"
-
 #else //#if defined(_SHADINGGRADEMAP)
-
-#include "UniversalToonBodyDoubleShadeWithFeather.hlsl"
-
+#include "UniversalToonBodyDoubleShadeWithFeather_Dissovle.hlsl"
 #endif //#if defined(_SHADINGGRADEMAP)
 
             float4 frag(VertexOutput i, fixed facing : VFACE) : SV_TARGET

@@ -33,13 +33,13 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
         _SPRDefaultUnlitColorMask("SPRDefaultUnlit Path Color Mask", int) = 15
         [Enum(OFF,0,FRONT,1,BACK,2)] _SRPDefaultUnlitColMode("SPRDefaultUnlit  Cull Mode", int) = 1  //OFF/FRONT/BACK
         // ClippingMask paramaters from Here.
-        _ClippingMask("ClippingMask", 2D) = "white" {}
-        //v.2.0.4
-        [HideInInspector] _IsBaseMapAlphaAsClippingMask("IsBaseMapAlphaAsClippingMask", Float) = 0
-        //
-        [Toggle(_)] _Inverse_Clipping("Inverse_Clipping", Float) = 0
-        _Clipping_Level("Clipping_Level", Range(0, 1)) = 0
-        _Tweak_transparency("Tweak_transparency", Range(-1, 1)) = 0
+        //_ClippingMask("ClippingMask", 2D) = "white" {}
+        ////v.2.0.4
+        //[HideInInspector] _IsBaseMapAlphaAsClippingMask("IsBaseMapAlphaAsClippingMask", Float) = 0
+        ////
+        //[Toggle(_)] _Inverse_Clipping("Inverse_Clipping", Float) = 0
+        //_Clipping_Level("Clipping_Level", Range(0, 1)) = 0
+        //_Tweak_transparency("Tweak_transparency", Range(-1, 1)) = 0
         // ClippingMask paramaters to Here.
 
         _MainTex ("BaseMap", 2D) = "white" {}
@@ -299,6 +299,7 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
             //V.2.0.4
             #pragma multi_compile _IS_OUTLINE_CLIPPING_NO _IS_OUTLINE_CLIPPING_YES
             #pragma multi_compile _OUTLINE_NML _OUTLINE_POS
+
             //アウトライン処理はUniversalToonOutline.hlslへ.
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "UniversalToonHead_Dissovle.hlsl"
@@ -332,11 +333,6 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
 
             #pragma vertex vert
             #pragma fragment frag
-
-
-
-
-
 
             // -------------------------------------
             // Material Keywords
@@ -403,9 +399,7 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
 			#include "Assets/VacuumShaders/Advanced Dissolve/Shaders/cginc/AdvancedDissolve.cginc"
             #include "UniversalToonHead_Dissovle.hlsl"
             #include "UniversalToonBody_Dissovle.hlsl"
-
             ENDHLSL
-            
         }
 
         Pass
@@ -426,7 +420,7 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
             // -------------------------------------
             // Material Keywords
             #pragma shader_feature _ALPHATEST_ON
-
+			#pragma shader_feature _GLOSSINESS_FROM_BASE_ALPHA
             //--------------------------------------
             // GPU Instancing
             #pragma multi_compile_instancing
@@ -445,9 +439,8 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
 			#pragma shader_feature_local _ _DISSOLVEMASKCOUNT_TWO _DISSOLVEMASKCOUNT_THREE _DISSOLVEMASKCOUNT_FOUR
 
             #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/ShadowCasterPass.hlsl"
 			#include "Assets/VacuumShaders/Advanced Dissolve/Shaders/cginc/AdvancedDissolve.cginc"
-
+			#include "Assets/VacuumShaders/Advanced Dissolve/Shaders/Basic/ShadowCasterPass.hlsl"
             ENDHLSL
         }
 
@@ -478,8 +471,22 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
             // GPU Instancing
             #pragma multi_compile_instancing
 
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/DepthOnlyPass.hlsl"
+            /*#include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/DepthOnlyPass.hlsl"*/
+
+			// -------------------------------------
+			// Advnaced Dissolve keywords
+			#pragma shader_feature_local _ _DISSOLVEGLOBALCONTROL_MASK_ONLY _DISSOLVEGLOBALCONTROL_MASK_AND_EDGE _DISSOLVEGLOBALCONTROL_ALL
+			#pragma shader_feature_local _ _DISSOLVEMAPPINGTYPE_TRIPLANAR _DISSOLVEMAPPINGTYPE_SCREEN_SPACE
+			#pragma shader_feature_local _ _DISSOLVEALPHASOURCE_CUSTOM_MAP _DISSOLVEALPHASOURCE_TWO_CUSTOM_MAPS _DISSOLVEALPHASOURCE_THREE_CUSTOM_MAPS
+			#pragma shader_feature_local _ _DISSOLVEMASK_XYZ_AXIS _DISSOLVEMASK_PLANE _DISSOLVEMASK_SPHERE _DISSOLVEMASK_BOX _DISSOLVEMASK_CYLINDER _DISSOLVEMASK_CONE
+			#pragma shader_feature_local _ _DISSOLVEEDGETEXTURESOURCE_GRADIENT _DISSOLVEEDGETEXTURESOURCE_MAIN_MAP _DISSOLVEEDGETEXTURESOURCE_CUSTOM
+			#pragma shader_feature_local _ _DISSOLVEMASKCOUNT_TWO _DISSOLVEMASKCOUNT_THREE _DISSOLVEMASKCOUNT_FOUR
+
+
+			#include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
+			#include "Assets/VacuumShaders/Advanced Dissolve/Shaders/cginc/AdvancedDissolve.cginc"
+			#include "Assets/VacuumShaders/Advanced Dissolve/Shaders/Basic/DepthOnlyPass.hlsl"
             ENDHLSL
         }
 

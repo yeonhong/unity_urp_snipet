@@ -7,13 +7,8 @@
 //
 
 
-
-
-
         float4 fragDoubleShadeFeather(VertexOutput i, fixed facing : VFACE) : SV_TARGET 
         {
-
-
                 i.normalDir = normalize(i.normalDir);
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
 
@@ -38,6 +33,7 @@
 
                 UNITY_SETUP_INSTANCE_ID(input);
                 UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+
                 input.vertexSH = i.vertexSH;
                 input.uv = i.uv0;
                 input.fogFactorAndVertexLight = i.fogFactorAndVertexLight;
@@ -71,35 +67,21 @@
                 UtsLight mainLight = GetMainUtsLightByID(i.mainLightID, i.posWorld.xyz, inputData.shadowCoord, i.positionCS);
 
                 half3 mainLightColor = GetLightColor(mainLight);
-
-
-                float4 _MainTex_var = tex2D(_MainTex,TRANSFORM_TEX(Set_UV0, _MainTex));
+                float4 _MainTex_var = tex2D(_MainTex, TRANSFORM_TEX(Set_UV0, _MainTex));
 //v.2.0.4
 #if defined(_IS_CLIPPING_MODE) 
-//DoubleShadeWithFeather_Clipping
-                float4 _ClippingMask_var = tex2D(_ClippingMask,TRANSFORM_TEX(Set_UV0, _ClippingMask));
-                float Set_Clipping = saturate((lerp( _ClippingMask_var.r, (1.0 - _ClippingMask_var.r), _Inverse_Clipping )+_Clipping_Level));
-                clip(Set_Clipping - 0.5);
-#elif defined(_IS_CLIPPING_TRANSMODE) || defined(_IS_TRANSCLIPPING_ON)
-//DoubleShadeWithFeather_TransClipping
-                float4 _ClippingMask_var = tex2D(_ClippingMask,TRANSFORM_TEX(Set_UV0, _ClippingMask));
-                float Set_MainTexAlpha = _MainTex_var.a;
-                float _IsBaseMapAlphaAsClippingMask_var = lerp( _ClippingMask_var.r, Set_MainTexAlpha, _IsBaseMapAlphaAsClippingMask );
-                float _Inverse_Clipping_var = lerp( _IsBaseMapAlphaAsClippingMask_var, (1.0 - _IsBaseMapAlphaAsClippingMask_var), _Inverse_Clipping );
-                float Set_Clipping = saturate((_Inverse_Clipping_var+_Clipping_Level));
-                clip(Set_Clipping - 0.5);
+				float4 dissolaveAlpha = AdvancedDissolveGetAlpha(i.uv0.xy, i.posWorld.xyz, i.normalDir, i.dissolveUV);
+				DoDissolveClip(dissolaveAlpha);
 
-#elif defined(_IS_CLIPPING_OFF) || defined(_IS_TRANSCLIPPING_OFF)
-//DoubleShadeWithFeather
+				float3 dissolveAlbedo = 0;
+				float3 dissolveEmission = 0;
+				float dissolveBlend = DoDissolveAlbedoEmission(dissolaveAlpha, dissolveAlbedo, dissolveEmission, i.uv0.xy, 1);
 #endif
 
                 real shadowAttenuation = 1.0;
 # ifdef _MAIN_LIGHT_SHADOWS
                 shadowAttenuation = mainLight.shadowAttenuation;
-
 # endif
-
-
 
 //v.2.0.4
 #ifdef _IS_PASS_FWDBASE
@@ -344,10 +326,13 @@
                 emissive = emissive_Color.rgb * _Emissive_Tex_var.rgb * emissiveMask;
 #endif
 
+		#if defined(_IS_CLIPPING_MODE) 
+				finalColor = lerp(finalColor, dissolveAlbedo, dissolveBlend);
+				emissive = lerp(emissive, dissolveEmission, dissolveBlend);
+		#endif // defined(_IS_CLIPPING_MODE) 
+
                 //Final Composition#if 
                 finalColor =  saturate(finalColor) + (envLightColor*envLightIntensity*_GI_Intensity*smoothstep(1,0,envLightIntensity/2)) + emissive;
-
-
                 finalColor += pointLightColor;
 #endif
 
@@ -361,7 +346,7 @@
 #elif _IS_CLIPPING_MODE
 //DoubleShadeWithFeather_Clipping
 
-                fixed4 finalRGBA = fixed4(finalColor,1);
+                fixed4 finalRGBA = fixed4(finalColor, 1);
 
 #elif _IS_CLIPPING_TRANSMODE
 //DoubleShadeWithFeather_TransClipping
