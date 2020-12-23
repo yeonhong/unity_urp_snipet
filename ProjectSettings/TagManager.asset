@@ -13,18 +13,18 @@ TagManager:
   - UI
   - 
   - 
-  - ShaderTesting
-  - Test1
-  - Test2
-  - Test3
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Floor
+  - Wall
+  - Tile
+  - Furniture
+  - Door
+  - Scene
+  - Outline
+  - Selectable
+  - OfficeDoor
+  - UnLockableObject
+  - NPC
+  - MeshCombine
   - 
   - 
   - 
