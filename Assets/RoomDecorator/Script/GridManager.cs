@@ -154,7 +154,9 @@ public class GridManager : MonoBehaviour {
         {
             for (int j = 0; j < furniture.length; j++)
             {
-                var tile = tiles.GetTileByCoordinate(furniture.origin.x + j, furniture.origin.y + i);
+				if (furniture.origin == null) continue;
+
+				var tile = tiles.GetTileByCoordinate(furniture.origin.x + j, furniture.origin.y + i);
                 if (tile == null || tile.isBlock)
                 {
                     furniture.SetColor(Color.red);
