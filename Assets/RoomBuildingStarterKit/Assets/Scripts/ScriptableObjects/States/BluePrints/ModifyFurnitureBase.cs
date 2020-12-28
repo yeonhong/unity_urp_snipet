@@ -454,6 +454,7 @@
 
                 if (InputWrapper.GetKeyUp(KeyCode.Mouse0) && canPutFurniture)
                 {
+					Debug.Log("가구설치");
                     furnitureTransform.position = targetPosition;
                     furnitureTransform.localRotation = targetRotation;
                     this.PutDownFurniture(floorEntity, targetPosition, targetRotation, this.occupiedFloorEntities.ToList());

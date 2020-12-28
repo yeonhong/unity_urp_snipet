@@ -42,6 +42,7 @@
         /// <param name="roomType">The room type.</param>
         public void StartBuildRoom(int roomType)
         {
+			Debug.Log("StartBuildRoom " + roomType);
             this.bluePrintingRoomType = roomType;
             BluePrintCursor.inst.SetState(BluePrintCursorState.Normal);
         }

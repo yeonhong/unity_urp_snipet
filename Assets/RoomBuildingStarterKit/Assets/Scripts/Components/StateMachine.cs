@@ -93,17 +93,24 @@
             this.StateMachineData.States.ForEach(s => s.Item.StateItem = s);
         }
 
-        /// <summary>
-        /// Executes every frame.
-        /// </summary>
-        private void Update()
+
+		StateBase preState;
+		/// <summary>
+		/// Executes every frame.
+		/// </summary>
+		private void Update()
         {
             if (this.isStopped)
             {
                 return;
             }
 
-            this.currentState.Update();
+			if (preState != currentState) {
+				preState = currentState;
+				Debug.Log(currentState.name);
+			}
+
+			this.currentState.Update();
             this.currentState = this.currentState.Transition();
         }
     }
