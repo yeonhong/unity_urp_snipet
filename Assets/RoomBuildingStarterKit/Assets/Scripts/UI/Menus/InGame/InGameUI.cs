@@ -6,6 +6,11 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+	/*
+	 * # 이 클래스를 싱글톤으로 하여 ui를 전역으로 제어.
+	 */
+
+
     /// <summary>
     /// The InGameUI class.
     /// </summary>
