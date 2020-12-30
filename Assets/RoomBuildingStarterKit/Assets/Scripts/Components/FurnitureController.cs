@@ -3,11 +3,6 @@
     using System.Collections;
     using UnityEngine;
 
-	/*
-	 //todo : 가구배치시 배치가능여부 체크 로직부분
-	 //todo : 문이나 창문이 벽에 회전이 자동으로 되는 로직부분
-	 */
-
 	/// <summary>
 	/// The FurnitureController class used to control furniture behaviour.
 	/// </summary>

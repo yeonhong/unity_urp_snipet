@@ -210,7 +210,8 @@
                 {
                     targetPosition = targetFloorEntity.GetWorldPositionByDir((short)(this.BluePrintData.DIRECTION_NEIGHBOURS_MAP[dir][1] - 4)) + this.BluePrintData.BLUEPRINT_FURNITURE_LAYER_OFFSET;
                 }
-                
+
+				Debug.Log("UpdateBuildBluePrintDoor dir : " + dir);
                 targetRotation = this.BluePrintData.DRAW_QUATERNIONS[dir];
 
                 if (this.editingFurniture.activeSelf == false)
@@ -361,115 +362,113 @@
         private void UpdateBuildFurniture()
         {
             var floorEntity = this.BluePrint.MouseEventListener.MouseHoveredFloorEntity ?? this.BluePrint.MouseEventListener.LastNotNullMouseHoveredFloorEntity;
-            if (floorEntity != null)
-            {
-                // Calculate the position and rotation of the editing furniture.
-                var furnitureTransform = this.editingFurniture.transform;
+            if (floorEntity != null) {
 
-                if (Input.GetKeyUp(KeyCode.R))
-                {
-                    this.editingFurnitureDirection = (short)((this.editingFurnitureDirection + 1) % 4);
-                    furnitureTransform.position = floorEntity.GetWorldPositionByDir((short)((this.editingFurnitureDirection + 3) % 4)) + this.BluePrintData.BLUEPRINT_FURNITURE_LAYER_OFFSET;
-                }
+				#region Calculate the position and rotation of the editing furniture.
+				var furnitureTransform = this.editingFurniture.transform;
 
-                var targetPosition = floorEntity.GetWorldPositionByDir((short)((this.editingFurnitureDirection + 3) % 4)) + this.BluePrintData.BLUEPRINT_FURNITURE_LAYER_OFFSET;
-                var targetRotation = Quaternion.Euler(this.editingFurnitureDirection * 90 * Vector3.up);
+				if (Input.GetKeyUp(KeyCode.R)) {
+					this.editingFurnitureDirection = (short)((this.editingFurnitureDirection + 1) % 4);
+					furnitureTransform.position = floorEntity.GetWorldPositionByDir((short)((this.editingFurnitureDirection + 3) % 4)) + this.BluePrintData.BLUEPRINT_FURNITURE_LAYER_OFFSET;
+				}
 
-                if (this.editingFurniture.activeSelf == false)
-                {
-                    this.editingFurniture.SetActive(true);
-                    furnitureTransform.position = targetPosition;
-                    furnitureTransform.localRotation = targetRotation;
-                }
+				var targetPosition = floorEntity.GetWorldPositionByDir((short)((this.editingFurnitureDirection + 3) % 4)) + this.BluePrintData.BLUEPRINT_FURNITURE_LAYER_OFFSET;
+				var targetRotation = Quaternion.Euler(this.editingFurnitureDirection * 90 * Vector3.up);
 
-                furnitureTransform.position = Vector3.SmoothDamp(furnitureTransform.position, targetPosition, ref this.furnitureSmoothFollowVelocity, BluePrintCursor.MOVE_SMOOTH_TIME, float.MaxValue, Time.unscaledDeltaTime);
-                furnitureTransform.localRotation = Quaternion.Lerp(furnitureTransform.localRotation, targetRotation, Time.unscaledDeltaTime * 20f);
+				if (this.editingFurniture.activeSelf == false) {
+					this.editingFurniture.SetActive(true);
+					furnitureTransform.position = targetPosition;
+					furnitureTransform.localRotation = targetRotation;
+				}
 
-                bool canPutFurniture = true;
-                var dimension = this.editingFurniture.GetComponent<FurnitureController>().Dimension;
-                var officeFloor = this.BluePrint.FoundationManager.OfficeFloorCollection.GetOfficeFloor(floorEntity.X, floorEntity.Z);
-                this.occupiedFloorEntities.Clear();
+				furnitureTransform.position = Vector3.SmoothDamp(furnitureTransform.position, targetPosition, ref this.furnitureSmoothFollowVelocity, BluePrintCursor.MOVE_SMOOTH_TIME, float.MaxValue, Time.unscaledDeltaTime);
+				furnitureTransform.localRotation = Quaternion.Lerp(furnitureTransform.localRotation, targetRotation, Time.unscaledDeltaTime * 20f);
+				#endregion
 
-                int dimensionX = (this.editingFurnitureDirection == 0 || this.editingFurnitureDirection == 2) ? dimension.x : dimension.y;
-                int dimensionY = (this.editingFurnitureDirection == 0 || this.editingFurnitureDirection == 2) ? dimension.y : dimension.x;
-                int rowMultiplier = ((this.editingFurnitureDirection == 0 || this.editingFurnitureDirection == 1) ? 1 : -1);
-                int colMultiplier = ((this.editingFurnitureDirection == 0 || this.editingFurnitureDirection == 3) ? 1 : -1);
+				#region 가구를 설치가능한지 체크
+				bool canPutFurniture = true;
+				var dimension = this.editingFurniture.GetComponent<FurnitureController>().Dimension;
+				var officeFloor = this.BluePrint.FoundationManager.OfficeFloorCollection.GetOfficeFloor(floorEntity.X, floorEntity.Z);
+				this.occupiedFloorEntities.Clear();
 
-                for (int i = 0; i < dimensionX; ++i)
-                {
-                    for (int j = 0; j < dimensionY; ++j)
-                    {
-                        var targetFloorEntity = this.BluePrint.FoundationManager.OfficeFloorCollection.GetOfficeFloor(officeFloor.X + i * rowMultiplier, officeFloor.Z + j * colMultiplier)?.FloorEntity;
+				int dimensionX = (this.editingFurnitureDirection == 0 || this.editingFurnitureDirection == 2) ? dimension.x : dimension.y;
+				int dimensionY = (this.editingFurnitureDirection == 0 || this.editingFurnitureDirection == 2) ? dimension.y : dimension.x;
+				int rowMultiplier = ((this.editingFurnitureDirection == 0 || this.editingFurnitureDirection == 1) ? 1 : -1);
+				int colMultiplier = ((this.editingFurnitureDirection == 0 || this.editingFurnitureDirection == 3) ? 1 : -1);
 
-                        // The occupied floor is invalid.
-                        if (targetFloorEntity == null ||
-                            this.BluePrint.BluePrintFloorEntities.Any(f => f == targetFloorEntity) == false ||
-                            targetFloorEntity.OccupiedRoom != null && targetFloorEntity.OccupiedRoom != this.BluePrint.gameObject ||
-                            targetFloorEntity.OccupiedDoorEntities.Any())
-                        {
-                            canPutFurniture = false;
-                        }
-                        else
-                        {
-                            this.occupiedFloorEntities.Add(targetFloorEntity);
-                        }
-                    }
-                }
+				for (int i = 0; i < dimensionX; ++i) {
+					for (int j = 0; j < dimensionY; ++j) {
+						var targetFloorEntity = this.BluePrint.FoundationManager.OfficeFloorCollection.GetOfficeFloor(officeFloor.X + i * rowMultiplier, officeFloor.Z + j * colMultiplier)?.FloorEntity;
 
-                // Overlap with door.
-                if (this.occupiedFloorEntities.Any(f => this.BluePrint.BluePrintDoorFurnitureEntities.Any(d => d.InRoomFloorEntity == f)))
-                {
-                    canPutFurniture = false;
-                    this.BluePrint.BluePrintDoorFurnitureEntities.Where(d => this.occupiedFloorEntities.Any(f => f == d.InRoomFloorEntity)).ToList().ForEach(d => d.Furniture.GetComponent<FurnitureController>().ShowNonBuildablePanel(false));
-                }
-                else if (this.BluePrint.BluePrintDoorFurnitureEntities.Any(d => d.CantBuildRealRoom == false))
-                {
-                    this.BluePrint.BluePrintDoorFurnitureEntities.ForEach(d => d.Furniture.GetComponent<FurnitureController>().DisableBuildablePanel());
-                }
+						// The occupied floor is invalid.
+						if (IsInvalidFloor(targetFloorEntity)) {
+							canPutFurniture = false;
+						} else {
+							this.occupiedFloorEntities.Add(targetFloorEntity);
+						}
+					}
+				}
 
-                // Overlap with other furnitures.
-                this.BluePrint.BluePrintFurnitureEntities.ForEach(f =>
-                {
-                    this.officeCollection.Reset(f.FloorEntities);
+				// Overlap with door.
+				if (IsOverlapWithDoor()) {
+					canPutFurniture = false;
+					this.BluePrint.BluePrintDoorFurnitureEntities.Where(d => this.occupiedFloorEntities.Any(f => f == d.InRoomFloorEntity)).ToList().ForEach(d => d.Furniture.GetComponent<FurnitureController>().ShowNonBuildablePanel(false));
+				} else if (this.BluePrint.BluePrintDoorFurnitureEntities.Any(d => d.CantBuildRealRoom == false)) {
+					this.BluePrint.BluePrintDoorFurnitureEntities.ForEach(d => d.Furniture.GetComponent<FurnitureController>().DisableBuildablePanel());
+				}
 
-                    if (this.occupiedFloorEntities.Any(ff => this.officeCollection.GetOfficeFloor(ff.X, ff.Z) != null))
-                    {
-                        canPutFurniture = false;
-                        f.Furniture.GetComponent<FurnitureController>().ShowNonBuildablePanel(false);
-                    }
-                    else if (!f.CantBuildRealRoom)
-                    {
-                        f.Furniture.GetComponent<FurnitureController>().DisableBuildablePanel();
-                    }
-                });
+				// Overlap with other furnitures.
+				this.BluePrint.BluePrintFurnitureEntities.ForEach(f => {
+					this.officeCollection.Reset(f.FloorEntities);
 
-                if (canPutFurniture)
-                {
-                    this.editingFurniture.GetComponent<FurnitureController>().ShowBuildablePanel();
-                }
-                else
-                {
-                    this.editingFurniture.GetComponent<FurnitureController>().ShowNonBuildablePanel();
-                }
+					if (IsOverlapWithOtherFurnitures()) {
+						canPutFurniture = false;
+						f.Furniture.GetComponent<FurnitureController>().ShowNonBuildablePanel(false);
+					} else if (!f.CantBuildRealRoom) {
+						f.Furniture.GetComponent<FurnitureController>().DisableBuildablePanel();
+					}
+				});
 
-                if (InputWrapper.GetKeyUp(KeyCode.Mouse0) && canPutFurniture)
-                {
-					Debug.Log("가구설치");
-                    furnitureTransform.position = targetPosition;
-                    furnitureTransform.localRotation = targetRotation;
-                    this.PutDownFurniture(floorEntity, targetPosition, targetRotation, this.occupiedFloorEntities.ToList());
-                    this.BluePrint.CanBuildRealRoom(this.BluePrint.BluePrintFloorEntities);
-                }
-            }
-        }
+				if (canPutFurniture) {
+					this.editingFurniture.GetComponent<FurnitureController>().ShowBuildablePanel();
+				} else {
+					this.editingFurniture.GetComponent<FurnitureController>().ShowNonBuildablePanel();
+				} 
+				#endregion
 
-        /// <summary>
-        /// Gets the mouse nearest border floor entity with direction.
-        /// </summary>
-        /// <param name="selectedFloorEntities">The selected floor entities.</param>
-        /// <param name="targetFloorEntity">The target floor entity.</param>
-        /// <param name="dir">The direction.</param>
-        private void GetMouseNearestBorderFloorEntityWithDirection(List<FloorEntity> selectedFloorEntities, out FloorEntity targetFloorEntity, out short dir)
+				if (InputWrapper.GetKeyUp(KeyCode.Mouse0) && canPutFurniture) {
+					Debug.Log("가구설치 진행");
+					furnitureTransform.position = targetPosition;
+					furnitureTransform.localRotation = targetRotation;
+					this.PutDownFurniture(floorEntity, targetPosition, targetRotation, this.occupiedFloorEntities.ToList());
+					this.BluePrint.CanBuildRealRoom(this.BluePrint.BluePrintFloorEntities);
+				}
+			}
+		}
+
+		private bool IsOverlapWithOtherFurnitures() {
+			return this.occupiedFloorEntities.Any(ff => this.officeCollection.GetOfficeFloor(ff.X, ff.Z) != null);
+		}
+
+		private bool IsOverlapWithDoor() {
+			return this.occupiedFloorEntities.Any(f => this.BluePrint.BluePrintDoorFurnitureEntities.Any(d => d.InRoomFloorEntity == f));
+		}
+
+		private bool IsInvalidFloor(FloorEntity targetFloorEntity) {
+			return targetFloorEntity == null ||
+										this.BluePrint.BluePrintFloorEntities.Any(f => f == targetFloorEntity) == false ||
+										targetFloorEntity.OccupiedRoom != null && targetFloorEntity.OccupiedRoom != this.BluePrint.gameObject ||
+										targetFloorEntity.OccupiedDoorEntities.Any();
+		}
+
+		/// <summary>
+		/// Gets the mouse nearest border floor entity with direction.
+		/// </summary>
+		/// <param name="selectedFloorEntities">The selected floor entities.</param>
+		/// <param name="targetFloorEntity">The target floor entity.</param>
+		/// <param name="dir">The direction.</param>
+		/// // todo : 여기서 마우스에 따른 방향을 계산함.
+		private void GetMouseNearestBorderFloorEntityWithDirection(List<FloorEntity> selectedFloorEntities, out FloorEntity targetFloorEntity, out short dir)
         {
             BuildSystemHelper.GetBorderFloorEntities(this.BluePrint.BluePrintFloorEntities, ref this.borderFloorEntities);
 
