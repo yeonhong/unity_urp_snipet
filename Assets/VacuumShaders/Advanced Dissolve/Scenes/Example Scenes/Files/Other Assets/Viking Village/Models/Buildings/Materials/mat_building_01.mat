@@ -96,6 +96,7 @@ Material:
     - _DissolveAlphaSource: 1
     - _DissolveAlphaSourceTexturesUVSet: 0
     - _DissolveCombineWithFragmentAlpha: 0
+    - _DissolveCombineWithMasterNodeAlpha: 0
     - _DissolveCombineWithMasterNodeColor: 0
     - _DissolveCutoff: 0.25
     - _DissolveEdgeColorIntensity: 8
@@ -113,8 +114,11 @@ Material:
     - _DissolveGIMultiplier: 1
     - _DissolveGlobalControl: 1
     - _DissolveMainMapTiling: 1
+    - _DissolveMap1Channel: 3
     - _DissolveMap1Intensity: 1
+    - _DissolveMap2Channel: 3
     - _DissolveMap2Intensity: 1
+    - _DissolveMap3Channel: 3
     - _DissolveMap3Intensity: 1
     - _DissolveMappingType: 2
     - _DissolveMask: 2
