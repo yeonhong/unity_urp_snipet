@@ -18,10 +18,8 @@ using UnityEngine.Rendering.Universal;
 */
 public class Blit : ScriptableRendererFeature
 {
-
 	public class BlitPass : ScriptableRenderPass
 	{
-
 		public Material blitMaterial = null;
 		public FilterMode filterMode { get; set; }
 
@@ -30,9 +28,9 @@ public class Blit : ScriptableRendererFeature
 		private RenderTargetIdentifier source { get; set; }
 		private RenderTargetIdentifier destination { get; set; }
 
-		RenderTargetHandle m_TemporaryColorTexture;
-		RenderTargetHandle m_DestinationTexture;
-		string m_ProfilerTag;
+		private RenderTargetHandle m_TemporaryColorTexture;
+		private RenderTargetHandle m_DestinationTexture;
+		private string m_ProfilerTag;
 
 		public BlitPass(RenderPassEvent renderPassEvent, BlitSettings settings, string tag) {
 			this.renderPassEvent = renderPassEvent;
@@ -64,7 +62,6 @@ public class Blit : ScriptableRendererFeature
 				cmd.GetTemporaryRT(m_DestinationTexture.id, opaqueDesc, filterMode);
 			}
 
-			//Debug.Log($"src = {source},     dst = {destination} ");
 			// Can't read and write to same color target, use a TemporaryRT
 			if (source == destination || (settings.srcType == settings.dstType && settings.srcType == Target.CameraColor)) {
 				cmd.GetTemporaryRT(m_TemporaryColorTexture.id, opaqueDesc, filterMode);
@@ -114,8 +111,7 @@ public class Blit : ScriptableRendererFeature
 	}
 
 	public BlitSettings settings = new BlitSettings();
-
-	BlitPass blitPass;
+	private BlitPass blitPass;
 
 	private RenderTargetIdentifier srcIdentifier, dstIdentifier;
 
@@ -160,6 +156,7 @@ public class Blit : ScriptableRendererFeature
 		}
 
 		if (settings.Event == RenderPassEvent.AfterRenderingPostProcessing) {
+			; // do nothing.
 		} else if (settings.Event == RenderPassEvent.AfterRendering && renderingData.postProcessingEnabled) {
 			// If event is AfterRendering, and src/dst is using CameraColor, switch to _AfterPostProcessTexture instead.
 			if (settings.srcType == Target.CameraColor) {
