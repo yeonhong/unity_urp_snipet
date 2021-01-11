@@ -39,8 +39,6 @@ public class ArrayTest : MonoBehaviour
 
 			// Set lifetime
 			points[i + 3] = t;
-
-			Debug.Log("points" + points);
 		}
 		
 		material.SetFloatArray("_Points", points);
