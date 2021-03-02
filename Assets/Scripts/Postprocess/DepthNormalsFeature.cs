@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+#pragma warning disable CS0618
 
 // https://alexanderameye.github.io/outlineshader.html
 

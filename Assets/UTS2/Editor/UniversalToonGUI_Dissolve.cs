@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+#pragma warning disable CS0414
 
 namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 {
