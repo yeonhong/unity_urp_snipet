@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AtlasA
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 9e808ec960acf6c4ca65dc0ff1bc14a3, type: 3}
+    - {fileID: 2800000, guid: 490f58b9870302b4583b19f1a4b9a44d, type: 3}
+    - {fileID: 2800000, guid: e1e79febce0cb87478aa6934aa42383a, type: 3}
+    - {fileID: 2800000, guid: 35eb06e64bc237a48912c3f91e7611e1, type: 3}
+    - {fileID: 2800000, guid: 03f8aa7814eec294dad5322fe49d33c7, type: 3}
+    - {fileID: 2800000, guid: 724de0b577f1283489e33773397b4ea3, type: 3}
+    - {fileID: 2800000, guid: bb953a4e1db53c54c9fcc36bf4852ebd, type: 3}
+    - {fileID: 2800000, guid: 1dd310bc28ad2ad45b42a0912d3c5e49, type: 3}
+    - {fileID: 2800000, guid: beb6f108ee2fe454ca6f1663530e3bbf, type: 3}
+    - {fileID: 2800000, guid: 46227a946886cb14caea384b5276a10c, type: 3}
+    - {fileID: 2800000, guid: 407dec03b30a5df4aa7195762fe24ca9, type: 3}
+    - {fileID: 2800000, guid: c198c0a22ac7ca34eadb8b08b9cb91f9, type: 3}
+    totalSpriteSurfaceArea: 543867
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c198c0a22ac7ca34eadb8b08b9cb91f9, type: 3}
+  - {fileID: 21300000, guid: 407dec03b30a5df4aa7195762fe24ca9, type: 3}
+  - {fileID: 21300000, guid: 46227a946886cb14caea384b5276a10c, type: 3}
+  - {fileID: 21300000, guid: 724de0b577f1283489e33773397b4ea3, type: 3}
+  - {fileID: 21300000, guid: 35eb06e64bc237a48912c3f91e7611e1, type: 3}
+  - {fileID: 21300000, guid: beb6f108ee2fe454ca6f1663530e3bbf, type: 3}
+  - {fileID: 21300000, guid: 03f8aa7814eec294dad5322fe49d33c7, type: 3}
+  - {fileID: 21300000, guid: 490f58b9870302b4583b19f1a4b9a44d, type: 3}
+  - {fileID: 21300000, guid: 9e808ec960acf6c4ca65dc0ff1bc14a3, type: 3}
+  - {fileID: 21300000, guid: e1e79febce0cb87478aa6934aa42383a, type: 3}
+  - {fileID: 21300000, guid: 1dd310bc28ad2ad45b42a0912d3c5e49, type: 3}
+  - {fileID: 21300000, guid: bb953a4e1db53c54c9fcc36bf4852ebd, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - SettingsButton 1
+  - SellRoomButton 1
+  - RemoveFloorButton_gray 1
+  - ConfirmButton 1
+  - BuildRoomButton 1
+  - RemoveFloorButton 1
+  - CloseButton 1
+  - 2
+  - 1
+  - 3
+  - CopyRoomButton 1
+  - ConfirmButton_gray 1
+  m_Tag: AtlasA
+  m_IsVariant: 0
