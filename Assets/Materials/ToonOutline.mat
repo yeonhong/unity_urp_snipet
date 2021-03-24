@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ToonDissovle
+  m_Name: ToonOutline
   m_Shader: {fileID: 4800000, guid: 6cfbd3cf4b883634da04912e3ea796b8, type: 3}
   m_ShaderKeywords: _ _DISSOLVEALPHASOURCE_CUSTOM_MAP _DISSOLVEMAPPINGTYPE_NORMAL
-    _DISSOLVEMASK_NONE _EMISSIVE_SIMPLE _IS_ANGELRING_OFF _IS_CLIPPING_MODE _IS_OUTLINE_CLIPPING_YES
+    _DISSOLVEMASK_NONE _EMISSIVE_SIMPLE _IS_ANGELRING_OFF _IS_CLIPPING_OFF _IS_OUTLINE_CLIPPING_NO
     _OUTLINE_NML
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,7 +18,7 @@ Material:
   m_CustomRenderQueue: 2000
   stringTagMap:
     IgnoreProjection: False
-    RenderType: TransparentCutout
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -167,7 +167,7 @@ Material:
     - _CameraFarFadeDistance: 2
     - _CameraNearFadeDistance: 1
     - _CameraRolling_Stabilizer: 0
-    - _ClippingMode: 1
+    - _ClippingMode: 0
     - _Clipping_Level: 0.554
     - _ColorMode: 0
     - _ColorShift_Speed: 0
@@ -194,7 +194,7 @@ Material:
     - _DissolveGlobalControl: 0
     - _DissolveMainMapTiling: 1
     - _DissolveMap1Channel: 3
-    - _DissolveMap1Intensity: 1
+    - _DissolveMap1Intensity: 0.869
     - _DissolveMap2Channel: 3
     - _DissolveMap2Intensity: 1
     - _DissolveMap3Channel: 3
@@ -252,7 +252,7 @@ Material:
     - _Is_NormalMapToHighColor: 0
     - _Is_NormalMapToRimLight: 0
     - _Is_Ortho: 0
-    - _Is_OutlineSizeFix: 0
+    - _Is_OutlineSizeFix: 1
     - _Is_OutlineTex: 0
     - _Is_PingPong_Base: 0
     - _Is_SpecularToHighColor: 0
@@ -270,7 +270,7 @@ Material:
     - _Offset_X_Axis_BLD: -0.05
     - _Offset_Y_Axis_BLD: 0.09
     - _Offset_Z: 0
-    - _Outline_Width: 10
+    - _Outline_Width: 8
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimLight: 0
@@ -331,10 +331,10 @@ Material:
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorShift: {r: 0, g: 0, b: 0, a: 1}
     - _DissolveEdgeColor: {r: 0, g: 1, b: 0, a: 1}
     - _DissolveMap1_Scroll: {r: 0, g: 0, b: 0, a: 0}
@@ -347,7 +347,7 @@ Material:
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Outline_Color: {r: 1, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
