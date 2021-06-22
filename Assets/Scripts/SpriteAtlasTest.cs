@@ -15,7 +15,7 @@ public class SpriteAtlasTest : MonoBehaviour
 	[SerializeField] private Image imageC = null;
 
 	[SerializeField] private Dictionary<SpriteAtlas, List<Sprite>> _dic;
-	[SerializeField] private List<Sprite> sprList = null;
+	//[SerializeField] private List<Sprite> sprList = null;
 
 	private Sprite GetSprite(SpriteAtlas atlas, string name) {
 		if (_dic == null) {
