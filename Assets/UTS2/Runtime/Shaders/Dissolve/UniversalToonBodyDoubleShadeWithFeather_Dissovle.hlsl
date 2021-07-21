@@ -306,6 +306,8 @@ float4 fragDoubleShadeFeather(VertexOutput i, fixed facing : VFACE) : SV_TARGET
 	finalColor += pointLightColor;
 #endif //_IS_PASS_FWDBASE
 
-fixed4 finalRGBA = fixed4(finalColor,1);
+	float getAlpah = lerp(1, _Tweak_transparency, _TransparentEnabled);
+	fixed4 finalRGBA = fixed4(finalColor, getAlpah);
+
 return finalRGBA;
 }

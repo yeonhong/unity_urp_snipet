@@ -894,6 +894,7 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 				//}
 				material.SetInt(_ZWriteMode, 0);
 				material.SetFloat(_ZOverDrawMode, 1);
+				m_MaterialEditor.RangeProperty(tweak_transparency, "Transparency Level");
 			}
 			else {
 				material.SetInt(_ZWriteMode, 1);

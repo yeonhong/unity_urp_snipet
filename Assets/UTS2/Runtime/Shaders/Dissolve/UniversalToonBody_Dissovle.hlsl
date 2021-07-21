@@ -155,6 +155,9 @@
             uniform float _Offset_Y_Axis_BLD;
             uniform fixed _Inverse_Z_Axis_BLD;
 
+			uniform fixed _TransparentEnabled;
+			uniform float _Tweak_transparency;
+
             // RaytracedHardShadow
 #define UNITY_PROJ_COORD(a) a
 #define UNITY_SAMPLE_SCREEN_SHADOW(tex, uv) tex2Dproj( tex, UNITY_PROJ_COORD(uv) ).r
