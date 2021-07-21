@@ -42,6 +42,19 @@ Shader "Universal Render Pipeline/Lit-PerspectiveRemoval"
         [HideInInspector] _Cull("__cull", Float) = 2.0
 
         _ReceiveShadows("Receive Shadows", Float) = 1.0
+
+
+
+		_PerspectiveRemovalAmount("_PerspectiveRemovalAmount", Range(0, 1)) = 0
+		_PerspectiveRemovalRadius("_PerspectiveRemovalRadius", Float) = 1
+		_HeadBonePositionWS("_HeadBonePositionWS", Vector) = (0,0,0,1)
+		_PerspectiveRemovalStartHeight("_PerspectiveRemovalStartHeight", Float) = 0
+		_PerspectiveRemovalEndHeight("_PerspectiveRemovalEndHeight", Float) = 1
+
+
+
+
+
         // Editmode props
         [HideInInspector] _QueueOffset("Queue offset", Float) = 0.0
 

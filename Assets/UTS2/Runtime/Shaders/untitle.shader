@@ -111,9 +111,7 @@ vec3 u_xlat6;
 bvec2 u_xlatb6;
 mediump float u_xlat16_11;
 float u_xlat12;
-bool u_xlatb12;
 float u_xlat18;
-bool u_xlatb18;
 void main()
 {
     u_xlat0.x = hlslcc_mtx4x4unity_MatrixV[1].z * _HeadBonePositionWS.y;
@@ -121,68 +119,63 @@ void main()
     u_xlat0.x = hlslcc_mtx4x4unity_MatrixV[2].z * _HeadBonePositionWS.z + u_xlat0.x;
     u_xlat0.x = u_xlat0.x + hlslcc_mtx4x4unity_MatrixV[3].z;
     u_xlat0.x = float(1.0) / float(abs(u_xlat0.x));
+
     u_xlat6.x = _ProjectionParams.y + 5.96046448e-08;
+
     u_xlat1 = in_POSITION0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];
     u_xlat1 = hlslcc_mtx4x4unity_ObjectToWorld[0] * in_POSITION0.xxxx + u_xlat1;
     u_xlat1 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat1;
     u_xlat1 = u_xlat1 + hlslcc_mtx4x4unity_ObjectToWorld[3];
-    u_xlat2 = u_xlat1.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
+    
+	u_xlat2 = u_xlat1.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];
     u_xlat2 = hlslcc_mtx4x4unity_MatrixVP[0] * u_xlat1.xxxx + u_xlat2;
     u_xlat2 = hlslcc_mtx4x4unity_MatrixVP[2] * u_xlat1.zzzz + u_xlat2;
     u_xlat2 = hlslcc_mtx4x4unity_MatrixVP[3] * u_xlat1.wwww + u_xlat2;
-    u_xlat12 = abs(u_xlat2.w) + _ZOffset;
+    
+	// u_xlat12
+	u_xlat12 = abs(u_xlat2.w) + _ZOffset;
     u_xlat6.x = max(u_xlat12, u_xlat6.x);
     u_xlat12 = (-u_xlat6.x) * hlslcc_mtx4x4glstate_matrix_projection[2].z + hlslcc_mtx4x4glstate_matrix_projection[3].z;
     u_xlat12 = u_xlat2.w * u_xlat12;
     u_xlat3.z = u_xlat12 / u_xlat6.x;
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb6.x = !!(vec4(0.0, 0.0, 0.0, 0.0)!=vec4(unity_OrthoParams.w));
-#else
-    u_xlatb6.x = vec4(0.0, 0.0, 0.0, 0.0)!=vec4(unity_OrthoParams.w);
-#endif
+    
     u_xlat12 = (-_ProjectionParams.y) + _ProjectionParams.z;
     u_xlat12 = (-_ZOffset) / u_xlat12;
     u_xlat4.z = u_xlat12 * -2.0 + u_xlat2.z;
+
     u_xlat4.xyw = u_xlat2.xyw;
     u_xlat3.xyw = u_xlat4.xyw;
-    u_xlat3 = (u_xlatb6.x) ? u_xlat4 : u_xlat3;
-    u_xlatb6.xy = notEqual(vec4(0.0, 0.0, 0.0, 0.0), vec4(_GlobalShouldDisableNiloToonZOffset, _GlobalShouldDisableNiloToonPerspectiveRemoval, _GlobalShouldDisableNiloToonZOffset, _GlobalShouldDisableNiloToonZOffset)).xy;
-    u_xlat2 = (u_xlatb6.x) ? u_xlat2 : u_xlat3;
+    u_xlat2 = u_xlat3;
     u_xlat6.xz = abs(u_xlat2.ww) * u_xlat2.xy;
     u_xlat0.xy = u_xlat6.xz * u_xlat0.xx + (-u_xlat2.xy);
     u_xlat1.xzw = u_xlat1.xyz + (-_HeadBonePositionWS.xyz);
     u_xlat16_5 = u_xlat1.y + (-_PerspectiveRemovalStartHeight);
-    u_xlat18 = dot(u_xlat1.xzw, u_xlat1.xzw);
+	
+	// u_xlat18
+	u_xlat18 = dot(u_xlat1.xzw, u_xlat1.xzw);
     u_xlat18 = sqrt(u_xlat18);
     u_xlat18 = u_xlat18 / _PerspectiveRemovalRadius;
     u_xlat18 = (-u_xlat18) + _PerspectiveRemovalRadius;
 
-#ifdef UNITY_ADRENO_ES3
-    u_xlat18 = min(max(u_xlat18, 0.0), 1.0);
-#else
     u_xlat18 = clamp(u_xlat18, 0.0, 1.0);
-#endif
     u_xlat18 = u_xlat18 * _PerspectiveRemovalAmount;
     u_xlat16_11 = (-_PerspectiveRemovalStartHeight) + _PerspectiveRemovalEndHeight;
     u_xlat16_5 = u_xlat16_5 / u_xlat16_11;
 
-#ifdef UNITY_ADRENO_ES3
-    u_xlat16_5 = min(max(u_xlat16_5, 0.0), 1.0);
-#else
     u_xlat16_5 = clamp(u_xlat16_5, 0.0, 1.0);
-#endif
     u_xlat18 = u_xlat18 * u_xlat16_5;
     u_xlat0.xy = vec2(u_xlat18) * u_xlat0.xy + u_xlat2.xy;
-#ifdef UNITY_ADRENO_ES3
-    u_xlatb18 = !!(unity_OrthoParams.w==1.0);
-#else
-    u_xlatb18 = unity_OrthoParams.w==1.0;
-#endif
-    u_xlatb12 = u_xlatb18 || u_xlatb6.y;
-    gl_Position.xy = (bool(u_xlatb12)) ? u_xlat2.xy : u_xlat0.xy;
+    
+	
+	gl_Position.xy = u_xlat2.xy
     gl_Position.zw = u_xlat2.zw;
-    vs_TEXCOORD0.xy = in_TEXCOORD0.xy * _BaseMap_ST.xy + _BaseMap_ST.zw;
-    vs_TEXCOORD1 = 0.0;
+
+
+
+
+
+
+
     return;
 }
 
