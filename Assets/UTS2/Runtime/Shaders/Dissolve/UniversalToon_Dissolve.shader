@@ -170,6 +170,7 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
 //Outline
         [KeywordEnum(NML,POS)] _OUTLINE("OUTLINE MODE", Float) = 0
         _Outline_Width ("Outline_Width", Float ) = 0
+		_Outline_MaxWidth ("Outline_MaxWidth", Float) = 1
         _Farthest_Distance ("Farthest_Distance", Float ) = 100
         _Nearest_Distance ("Nearest_Distance", Float ) = 0.5
         _Outline_Sampler ("Outline_Sampler", 2D) = "white" {}
@@ -295,7 +296,7 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
             #pragma target 2.0
             //V.2.0.4
             #pragma multi_compile _IS_OUTLINE_CLIPPING_NO _IS_OUTLINE_CLIPPING_YES
-            #pragma multi_compile _OUTLINE_NML _OUTLINE_POS
+            #pragma multi_compile _OUTLINE_NML _OUTLINE_POS _OUTLINE_MAX
 
 			// Advnaced Dissolve keywords
 			#pragma shader_feature_local _ _DISSOLVEGLOBALCONTROL_MASK_ONLY _DISSOLVEGLOBALCONTROL_MASK_AND_EDGE _DISSOLVEGLOBALCONTROL_ALL

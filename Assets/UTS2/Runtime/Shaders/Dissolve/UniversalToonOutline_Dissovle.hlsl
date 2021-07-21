@@ -23,6 +23,7 @@ uniform fixed _Is_LightColor_Outline;
 uniform float4 _Color;
 uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
 uniform float _Outline_Width;
+uniform float _Outline_MaxWidth;
 uniform float _Farthest_Distance;
 uniform float _Nearest_Distance;
 uniform sampler2D _Outline_Sampler; uniform float4 _Outline_Sampler_ST;
@@ -73,7 +74,11 @@ VertexOutput vert(VertexInput v) {
 	float3 _BakedNormalDir = normalize(mul(_BakedNormal_var.rgb, tangentTransform));
 
 	//ここまで.
-	float Set_Outline_Width = (_Outline_Width * 0.001 * smoothstep(_Farthest_Distance, _Nearest_Distance, distance(objPos.rgb, _WorldSpaceCameraPos))*_Outline_Sampler_var.rgb).r;
+	float Set_Outline_Width = (_Outline_Width * 0.001 * 
+		smoothstep(_Farthest_Distance, 
+			_Nearest_Distance, 
+			distance(objPos.rgb, _WorldSpaceCameraPos)
+		)*_Outline_Sampler_var.rgb).r;
 	Set_Outline_Width *= (1.0f - _ZOverDrawMode);
 
 	//v.2.0.7.5
@@ -91,12 +96,20 @@ VertexOutput vert(VertexInput v) {
 	//v2.0.4
 #ifdef _OUTLINE_NML
 	//v.2.0.4.3 baked Normal Texture for Outline
-	//o.pos = UnityObjectToClipPos(lerp(float4(v.vertex.xyz + v.normal * Set_Outline_Width, 1), float4(v.vertex.xyz + _BakedNormalDir * Set_Outline_Width, 1), _Is_BakedNormal));
+	o.pos = UnityObjectToClipPos(
+		lerp(	float4(v.vertex.xyz + v.normal * Set_Outline_Width, 1), 
+				float4(v.vertex.xyz + _BakedNormalDir * Set_Outline_Width, 1), 
+				_Is_BakedNormal)
+			);
+#elif _OUTLINE_MAX
 	o.pos = UnityObjectToClipPos(v.vertex);
-	float3 clipNormal = mul((float3x3)UNITY_MATRIX_MVP, lerp(v.normal, _BakedNormalDir, _Is_BakedNormal)).xyz;
-	float2 offset = normalize(clipNormal.xy) / _ScreenParams.xy * _Outline_Width * o.pos.w;
-	o.pos.xy += offset;
 
+	float outlineWidth = _Outline_Width * o.pos.w;
+	outlineWidth = min(outlineWidth, _Outline_MaxWidth) * _Outline_Sampler_var.r;
+
+	float3 clipNormal = mul((float3x3)UNITY_MATRIX_MVP, lerp(v.normal, _BakedNormalDir, _Is_BakedNormal)).xyz;
+	float2 offset = normalize(clipNormal.xy) / _ScreenParams.xy * outlineWidth;
+	o.pos.xy += offset;
 #elif _OUTLINE_POS
 	Set_Outline_Width = Set_Outline_Width * 2;
 	float signVar = dot(normalize(v.vertex), normalize(v.normal)) < 0 ? -1 : 1;

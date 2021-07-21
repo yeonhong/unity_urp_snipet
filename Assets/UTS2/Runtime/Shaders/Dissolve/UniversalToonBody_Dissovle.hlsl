@@ -286,19 +286,21 @@
 					float3 normalDir : TEXCOORD3;
 					float3 tangentDir : TEXCOORD4;
 					float3 bitangentDir : TEXCOORD5;
+					
+					ADVANCED_DISSOLVE_DATA(6)
 					//v.2.0.7
-					float mirrorFlag : TEXCOORD6;
+					float mirrorFlag : TEXCOORD7;
 
-					DECLARE_LIGHTMAP_OR_SH(lightmapUV, vertexSH, 7);
-					half4 fogFactorAndVertexLight   : TEXCOORD8; // x: fogFactor, yzw: vertex light
-	# ifndef _MAIN_LIGHT_SHADOWS
-					float4 positionCS               : TEXCOORD9;
-					int   mainLightID              : TEXCOORD10;
-	# else
-					float4 shadowCoord              : TEXCOORD9;
-					float4 positionCS               : TEXCOORD10;
-					int   mainLightID              : TEXCOORD11;
-	# endif
+					DECLARE_LIGHTMAP_OR_SH(lightmapUV, vertexSH, 8);
+					half4 fogFactorAndVertexLight : TEXCOORD9; // x: fogFactor, yzw: vertex light
+				# ifndef _MAIN_LIGHT_SHADOWS
+					float4 positionCS : TEXCOORD10;
+					int   mainLightID : TEXCOORD11;
+				# else
+					float4 shadowCoord : TEXCOORD10;
+					float4 positionCS : TEXCOORD11;
+					int   mainLightID : TEXCOORD12;
+				# endif
 					UNITY_VERTEX_INPUT_INSTANCE_ID
 					UNITY_VERTEX_OUTPUT_STEREO
 #else
@@ -564,7 +566,7 @@
 
 
 #if defined(_SHADINGGRADEMAP)
-#include "UniversalToonBodyShadingGradeMap.hlsl"
+#include "UniversalToonBodyShadingGradeMap_Dissovle.hlsl"
 #else //#if defined(_SHADINGGRADEMAP)
 #include "UniversalToonBodyDoubleShadeWithFeather_Dissovle.hlsl"
 #endif //#if defined(_SHADINGGRADEMAP)
