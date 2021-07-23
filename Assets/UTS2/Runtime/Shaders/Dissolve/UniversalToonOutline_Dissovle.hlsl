@@ -96,13 +96,19 @@ VertexOutput vert(VertexInput v) {
 	//v2.0.4
 #ifdef _OUTLINE_NML
 	//v.2.0.4.3 baked Normal Texture for Outline
-	o.pos = UnityObjectToClipPos(
-		lerp(	float4(v.vertex.xyz + v.normal * Set_Outline_Width, 1), 
-				float4(v.vertex.xyz + _BakedNormalDir * Set_Outline_Width, 1), 
-				_Is_BakedNormal)
-			);
+	//o.pos = UnityObjectToClipPos(
+	//	lerp(	float4(v.vertex.xyz + v.normal * Set_Outline_Width, 1), 
+	//			float4(v.vertex.xyz + _BakedNormalDir * Set_Outline_Width, 1), 
+	//			_Is_BakedNormal)
+	//		);
+	o.pos = perspectiveRemoval(
+		lerp(float4(v.vertex.xyz + v.normal * Set_Outline_Width, 1),
+			float4(v.vertex.xyz + _BakedNormalDir * Set_Outline_Width, 1),
+			_Is_BakedNormal)
+		);
 #elif _OUTLINE_MAX
-	o.pos = UnityObjectToClipPos(v.vertex);
+	//o.pos = UnityObjectToClipPos(v.vertex);
+	o.pos = perspectiveRemoval(v.vertex);
 
 	float outlineWidth = _Outline_Width * o.pos.w;
 	outlineWidth = min(outlineWidth, _Outline_MaxWidth) * _Outline_Sampler_var.r;
@@ -113,7 +119,8 @@ VertexOutput vert(VertexInput v) {
 #elif _OUTLINE_POS
 	Set_Outline_Width = Set_Outline_Width * 2;
 	float signVar = dot(normalize(v.vertex), normalize(v.normal)) < 0 ? -1 : 1;
-	o.pos = UnityObjectToClipPos(float4(v.vertex.xyz + signVar * normalize(v.vertex) * Set_Outline_Width, 1));
+	//o.pos = UnityObjectToClipPos(float4(v.vertex.xyz + signVar * normalize(v.vertex) * Set_Outline_Width, 1));
+	o.pos = perspectiveRemoval(float4(v.vertex.xyz + signVar * normalize(v.vertex) * Set_Outline_Width, 1));
 #endif
 	//v.2.0.7.5
 	o.pos.z = o.pos.z + _Offset_Z * _ClipCameraPos.z;

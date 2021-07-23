@@ -3,12 +3,11 @@
 	Properties
 	{ 
 		[Header(ZOffset)] _ZOffset("_ZOffset (Default 0)", Range(-1, 1)) = 0
-
 		_PerspectiveRemovalAmount("_PerspectiveRemovalAmount", Range(0, 1)) = 0
 		_PerspectiveRemovalRadius("_PerspectiveRemovalRadius", float) = 100
 		_HeadBonePositionWS("_HeadBonePositionWS", Vector) = (0,0,1,1)
 		_PerspectiveRemovalStartHeight("_PerspectiveRemovalStartHeight", float) = 0
-		_PerspectiveRemovalEndHeight("_PerspectiveRemovalEndHeight", float) = 1000
+		_PerspectiveRemovalEndHeight("_PerspectiveRemovalEndHeight", float) = 100
 	}
 
 	SubShader

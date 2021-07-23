@@ -92,6 +92,12 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 		private const string STR_ONSTATE = "Active";
 		private const string STR_OFFSTATE = "Off";
 
+		private const string ShaderProp_ZOffset = "_ZOffset";
+		private const string ShaderProp_PerspectiveRemovalAmount = "_PerspectiveRemovalAmount";
+		private const string ShaderProp_PerspectiveRemovalRadius = "_PerspectiveRemovalRadius";
+		private const string ShaderProp_PerspectiveRemovalStartHeight = "_PerspectiveRemovalStartHeight";
+		private const string ShaderProp_PerspectiveRemovalEndHeight = "_PerspectiveRemovalEndHeight";
+		private const string ShaderProp_HeadBonePositionWS = "_HeadBonePositionWS";
 
 		public enum _UTS_Technique
 		{
@@ -198,6 +204,7 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 		private static bool _Tessellation_Foldout = false;
 		private static bool _LightColorContribution_Foldout = false;
 		private static bool _AdditionalLightingSettings_Foldout = false;
+		private static bool _PerpectiveRemoval_Foldout = false;
 
 		// -----------------------------------------------------
 		//m_MaterialEditorのメソッドをUIとして使うもののみを指定する.
@@ -286,6 +293,12 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 		private MaterialProperty offset_X_Axis_BLD = null;
 		private MaterialProperty offset_Y_Axis_BLD = null;
 
+		private MaterialProperty zOffset = null;
+		private MaterialProperty perspectiveRemovalAmount = null;
+		private MaterialProperty perspectiveRemovalRadius = null;
+		private MaterialProperty perspectiveRemovalStartHeight = null;
+		private MaterialProperty perspectiveRemovalEndHeight = null;
+		private MaterialProperty headBonePositionWS = null;
 		//------------------------------------------------------
 
 		private MaterialEditor m_MaterialEditor;
@@ -428,6 +441,13 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 			unlit_Intensity = FindProperty(ShaderPropUnlit_Intensity, props);
 			offset_X_Axis_BLD = FindProperty("_Offset_X_Axis_BLD", props);
 			offset_Y_Axis_BLD = FindProperty("_Offset_Y_Axis_BLD", props);
+
+			zOffset = FindProperty(ShaderProp_ZOffset, props);
+			perspectiveRemovalAmount = FindProperty(ShaderProp_PerspectiveRemovalAmount, props);
+			perspectiveRemovalRadius = FindProperty(ShaderProp_PerspectiveRemovalRadius, props);
+			perspectiveRemovalStartHeight = FindProperty(ShaderProp_PerspectiveRemovalStartHeight, props);
+			perspectiveRemovalEndHeight = FindProperty(ShaderProp_PerspectiveRemovalEndHeight, props);
+			headBonePositionWS = FindProperty(ShaderProp_HeadBonePositionWS, props);
 
 			//VacuumShaders
 			VacuumShaders.AdvancedDissolve.MaterialProperties.Init(props);
@@ -746,6 +766,15 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 
 				EditorGUILayout.Space();
 			}
+
+			_PerpectiveRemoval_Foldout = Foldout(_PerpectiveRemoval_Foldout, "【Perspective Removal Setups】");
+			if (_PerpectiveRemoval_Foldout) {
+				EditorGUI.indentLevel++;
+				EditorGUILayout.Space();
+				GUI_PerspectiveRemovalSettings(material);
+				EditorGUI.indentLevel--;
+			}
+
 			ApplyClippingMode(material);
 			ApplyStencilMode(material);
 			ApplyAngelRing(material);
@@ -755,7 +784,6 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 			if (EditorGUI.EndChangeCheck()) {
 				m_MaterialEditor.PropertiesChanged();
 			}
-
 		}// End of OnGUI()
 
 
@@ -2374,6 +2402,15 @@ namespace UnityEditor.Rendering.Universal.Toon.ShaderGUI
 				EditorGUI.indentLevel--;
 			}
 			EditorGUILayout.Space();
+		}
+
+		private void GUI_PerspectiveRemovalSettings(Material material) {
+			m_MaterialEditor.RangeProperty(zOffset, "_ZOffset (Default 0)");
+			m_MaterialEditor.RangeProperty(perspectiveRemovalAmount, "_PerspectiveRemovalAmount");
+			m_MaterialEditor.FloatProperty(perspectiveRemovalRadius, "_PerspectiveRemovalRadius");
+			m_MaterialEditor.FloatProperty(perspectiveRemovalStartHeight, "_PerspectiveRemovalStartHeight");
+			m_MaterialEditor.FloatProperty(perspectiveRemovalEndHeight, "_PerspectiveRemovalEndHeight");
+			m_MaterialEditor.VectorProperty(headBonePositionWS, "_HeadBonePositionWS");
 		}
 
 		public void DoPopup(GUIContent label, MaterialProperty property, string[] options) {

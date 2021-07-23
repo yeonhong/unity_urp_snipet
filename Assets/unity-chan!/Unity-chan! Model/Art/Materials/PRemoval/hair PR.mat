@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: hair
+  m_Name: hair PR
   m_Shader: {fileID: 4800000, guid: 6cfbd3cf4b883634da04912e3ea796b8, type: 3}
   m_ShaderKeywords: _ _DISSOLVEALPHASOURCE_MAIN_MAP_ALPHA _DISSOLVEEDGETEXTURESOURCE_NONE
     _DISSOLVEGLOBALCONTROL_NONE _DISSOLVEMAPPINGTYPE_NORMAL _DISSOLVEMASKCOUNT_ONE
@@ -251,9 +251,9 @@ Material:
     - _Offset_Z: 0
     - _Outline_MaxWidth: 1
     - _Outline_Width: 0
-    - _PerspectiveRemovalAmount: 0
+    - _PerspectiveRemovalAmount: 1
     - _PerspectiveRemovalEndHeight: 100
-    - _PerspectiveRemovalRadius: 100
+    - _PerspectiveRemovalRadius: 1.2
     - _PerspectiveRemovalStartHeight: 0
     - _RimLight: 0
     - _RimLight_FeatherOff: 0
@@ -289,7 +289,7 @@ Material:
     - _Unlit_Intensity: 1
     - _Use_1stAs2nd: 1
     - _Use_BaseAs1st: 1
-    - _ZOffset: 0
+    - _ZOffset: 1
     - _ZOverDrawMode: 0
     - _ZWriteMode: 1
     - _simpleUI: 0
@@ -313,7 +313,7 @@ Material:
     - _DissolveMaskPosition: {r: 0, g: 0, b: 0, a: 0}
     - _Dissolve_ObjectWorldPos: {r: 0, g: 0, b: 0, a: 0}
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
-    - _HeadBonePositionWS: {r: 0, g: 0, b: 1, a: 1}
+    - _HeadBonePositionWS: {r: 0, g: 1, b: 1, a: 1}
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _Outline_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}

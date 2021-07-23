@@ -532,7 +532,8 @@
                 o.bitangentDir = normalize(cross(o.normalDir, o.tangentDir) * v.tangent.w);
                 o.posWorld = mul(unity_ObjectToWorld, v.vertex);
 
-                o.pos = UnityObjectToClipPos( v.vertex );
+                //o.pos = UnityObjectToClipPos( v.vertex );
+				o.pos = perspectiveRemoval(v.vertex);
                 //v.2.0.7 鏡の中判定（右手座標系か、左手座標系かの判定）o.mirrorFlag = -1 なら鏡の中.
                 float3 crossFwd = cross(UNITY_MATRIX_V[0], UNITY_MATRIX_V[1]);
                 o.mirrorFlag = dot(crossFwd, UNITY_MATRIX_V[2]) < 0 ? 1 : -1;
@@ -547,7 +548,9 @@
                 OUTPUT_SH(o.normalDir.xyz, o.vertexSH);
 
                 o.fogFactorAndVertexLight = half4(fogFactor, vertexLight);
-                o.positionCS = positionCS;
+				o.positionCS = positionCS;
+				
+
   #if defined(_MAIN_LIGHT_SHADOWS) && !defined(_RECEIVE_SHADOWS_OFF)
     #if SHADOWS_SCREEN
                 o.shadowCoord = ComputeScreenPos(positionCS);

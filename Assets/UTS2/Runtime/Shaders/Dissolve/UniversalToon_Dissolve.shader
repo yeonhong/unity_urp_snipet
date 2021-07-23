@@ -269,7 +269,16 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
 
 		//Meta
 		[HideInInspector] _Dissolve_ObjectWorldPos("", Vector) = (0, 0, 0, 0)
+
+		// perspective removal
+		[Header(ZOffset)] _ZOffset("_ZOffset (Default 0)", Range(-1, 1)) = 0
+		_PerspectiveRemovalAmount("_PerspectiveRemovalAmount", Range(0, 1)) = 0
+		_PerspectiveRemovalRadius("_PerspectiveRemovalRadius", float) = 100
+		_HeadBonePositionWS("_HeadBonePositionWS", Vector) = (0, 0, 1, 1)
+		_PerspectiveRemovalStartHeight("_PerspectiveRemovalStartHeight", float) = 0
+		_PerspectiveRemovalEndHeight("_PerspectiveRemovalEndHeight", float) = 100
     }
+
     SubShader {
         Tags {
             "RenderType"="Opaque"
@@ -310,6 +319,7 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
 			#include "Assets/VacuumShaders/Advanced Dissolve/Shaders/cginc/AdvancedDissolve.cginc"
+			#include "PerspectiveRemoval.cginc"
 			#include "UniversalToonHead_Dissovle.hlsl"
             #include "UniversalToonOutline_Dissovle.hlsl"
             ENDHLSL
@@ -405,6 +415,7 @@ Shader "Universal Render Pipeline/Toon-Dissolve" {
             #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/LitForwardPass.hlsl"
 			#include "Assets/VacuumShaders/Advanced Dissolve/Shaders/cginc/AdvancedDissolve.cginc"
+			#include "PerspectiveRemoval.cginc"
             #include "UniversalToonHead_Dissovle.hlsl"
             #include "UniversalToonBody_Dissovle.hlsl"
             ENDHLSL

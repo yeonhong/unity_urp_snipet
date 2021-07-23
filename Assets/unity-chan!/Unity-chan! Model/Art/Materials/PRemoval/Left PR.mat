@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: hair
+  m_Name: Left PR
   m_Shader: {fileID: 4800000, guid: 6cfbd3cf4b883634da04912e3ea796b8, type: 3}
   m_ShaderKeywords: _ _DISSOLVEALPHASOURCE_MAIN_MAP_ALPHA _DISSOLVEEDGETEXTURESOURCE_NONE
     _DISSOLVEGLOBALCONTROL_NONE _DISSOLVEMAPPINGTYPE_NORMAL _DISSOLVEMASKCOUNT_ONE
@@ -44,10 +44,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ClippingMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _DissolveEdgeTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -68,20 +64,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EnvMapSampler:
-        m_Texture: {fileID: 2800000, guid: 763c5d30206d1d54a9b49b3309e37fe1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _FalloffSampler:
-        m_Texture: {fileID: 2800000, guid: cc8f70f2ec571e9478efa98c041cde7b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _HighColor_Tex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: cbb65ec17f92eb44fb0dde6381b6a415, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCap_Sampler:
@@ -96,20 +84,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalMapSampler:
-        m_Texture: {fileID: 2800000, guid: 9eea3b9b4b755f64da2c821145616f44, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _OutlineTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Outline_Sampler:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _RimLightSampler:
-        m_Texture: {fileID: 2800000, guid: a18067604964b5a4d8fd5552ed0d789e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Set_1st_ShadePosition:
@@ -136,10 +116,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpecularReflectionSampler:
-        m_Texture: {fileID: 2800000, guid: c4271b2b1e8bfa949aa9230abaa7709e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _1st2nd_Shades_Feather: 0.0001
     - _1st_ShadeColor_Feather: 0.0001
@@ -163,7 +139,6 @@ Material:
     - _BumpScaleMatcap: 1
     - _CameraRolling_Stabilizer: 0
     - _ClippingMode: 0
-    - _Clipping_Level: 0
     - _ColorShift_Speed: 0
     - _CullMode: 2
     - _Cutoff: 0.5
@@ -204,15 +179,11 @@ Material:
     - _DissolveSourceAlphaTexturesBlend: 0
     - _DissolveTriplanarMappingSpace: 0
     - _EMISSIVE: 0
-    - _EdgeThickness: 0.5
-    - _FalloffPower: 0.5
     - _Farthest_Distance: 100
     - _GI_Intensity: 0
     - _HighColor_Power: 0
-    - _Inverse_Clipping: 0
     - _Inverse_MatcapMask: 0
     - _Inverse_Z_Axis_BLD: 1
-    - _IsBaseMapAlphaAsClippingMask: 0
     - _Is_BLD: 0
     - _Is_BakedNormal: 0
     - _Is_BlendAddToHiColor: 0
@@ -251,9 +222,9 @@ Material:
     - _Offset_Z: 0
     - _Outline_MaxWidth: 1
     - _Outline_Width: 0
-    - _PerspectiveRemovalAmount: 0
+    - _PerspectiveRemovalAmount: 1
     - _PerspectiveRemovalEndHeight: 100
-    - _PerspectiveRemovalRadius: 100
+    - _PerspectiveRemovalRadius: 1.2
     - _PerspectiveRemovalStartHeight: 0
     - _RimLight: 0
     - _RimLight_FeatherOff: 0
@@ -268,7 +239,6 @@ Material:
     - _Scroll_EmissiveV: 0
     - _Set_SystemShadowsToBase: 1
     - _ShadeColor_Step: 0
-    - _SpecularPower: 20
     - _StencilComp: 0
     - _StencilMode: 0
     - _StencilNo: 1
@@ -285,11 +255,11 @@ Material:
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
     - _Tweak_SystemShadowsLevel: 0
-    - _Tweak_transparency: 0
+    - _Tweak_transparency: 1
     - _Unlit_Intensity: 1
-    - _Use_1stAs2nd: 1
-    - _Use_BaseAs1st: 1
-    - _ZOffset: 0
+    - _Use_1stAs2nd: 0
+    - _Use_BaseAs1st: 0
+    - _ZOffset: 1
     - _ZOverDrawMode: 0
     - _ZWriteMode: 1
     - _simpleUI: 0
@@ -298,8 +268,8 @@ Material:
     - _utsVersionY: 2
     - _utsVersionZ: 0
     m_Colors:
-    - _1st_ShadeColor: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
-    - _2nd_ShadeColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
+    - _1st_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
@@ -313,10 +283,9 @@ Material:
     - _DissolveMaskPosition: {r: 0, g: 0, b: 0, a: 0}
     - _Dissolve_ObjectWorldPos: {r: 0, g: 0, b: 0, a: 0}
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
-    - _HeadBonePositionWS: {r: 0, g: 0, b: 1, a: 1}
+    - _HeadBonePositionWS: {r: 0, g: 1, b: 1, a: 1}
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _Outline_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ShadowColor: {r: 0.8, g: 0.8, b: 1, a: 1}
     - _ViewShift: {r: 0, g: 0, b: 0, a: 1}
