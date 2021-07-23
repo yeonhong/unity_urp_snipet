@@ -30,7 +30,6 @@
 			struct Varyings
 			{
 				float4 positionHCS  : SV_POSITION;
-				float4 color : TEXCOORD2;
 			};
 
 			float _ZOffset;
@@ -65,7 +64,7 @@
 				u_xlat12 = (-u_xlat6.x) * UNITY_MATRIX_P[2].z + UNITY_MATRIX_P[3].z;
 				u_xlat12 = u_xlat2.w * u_xlat12;
 				u_xlat3.z = u_xlat12 / u_xlat6.x;
-				
+
 				u_xlat12 = (-_ProjectionParams.y) + _ProjectionParams.z;
 				u_xlat12 = (-_ZOffset) / u_xlat12;
 				u_xlat2.z = (u_xlat12 * -2.0) + u_xlat2.z;
@@ -89,16 +88,8 @@
 				u_xlat0.xy *= u_xlat18;
 				u_xlat0.xy += u_xlat2.xy;
 				
-				OUT.positionHCS.xy = u_xlat0.xy;// TransformObjectToHClip(IN.positionOS.xyz);
+				OUT.positionHCS.xy = (unity_OrthoParams.w == 1.0) ? u_xlat2.xy : u_xlat0.xy;
 				OUT.positionHCS.zw = u_xlat2.zw;
-
-
-
-
-				OUT.color.rb = u_xlat2.xy;
-				OUT.color.ga = u_xlat2.zw;
-				//OUT.positionHCS.xy = u_xlat0.xy;
-				//OUT.positionHCS.zw = u_xlat2.zw;
 				
 				return OUT;
 			}

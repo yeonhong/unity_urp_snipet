@@ -61,7 +61,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _PerspectiveRemovalAmount: 1
-    - _PerspectiveRemovalEndHeight: 1000
+    - _PerspectiveRemovalEndHeight: 100
     - _PerspectiveRemovalRadius: 100
     - _PerspectiveRemovalStartHeight: 0
     - _QueueOffset: 0
@@ -78,7 +78,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HeadBonePositionWS: {r: 0, g: 0, b: 1, a: 0}
+    - _HeadBonePositionWS: {r: 0, g: 0.8, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
 --- !u!114 &2990959198511465607
 MonoBehaviour:
