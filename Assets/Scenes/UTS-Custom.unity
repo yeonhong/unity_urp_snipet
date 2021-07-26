@@ -1606,6 +1606,7 @@ GameObject:
   - component: {fileID: 7425847673363585537}
   - component: {fileID: 7425847673363585539}
   - component: {fileID: 7425847673363585543}
+  - component: {fileID: 7425847673352302148}
   m_Layer: 0
   m_Name: unitychan PR
   m_TagString: Untagged
@@ -1613,6 +1614,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7425847673352302148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7425847673352302147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac034a4f6d2e5342a8f64442db3d478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tHead: {fileID: 7425847673352401877}
 --- !u!1 &7425847673352302149
 GameObject:
   m_ObjectHideFlags: 0

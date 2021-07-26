@@ -7,10 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: eye_R2 PR
+  m_Name: ToonDissovle-Normal
   m_Shader: {fileID: 4800000, guid: 6cfbd3cf4b883634da04912e3ea796b8, type: 3}
-  m_ShaderKeywords: _ _DISSOLVEALPHASOURCE_MAIN_MAP_ALPHA _DISSOLVEEDGETEXTURESOURCE_NONE
-    _DISSOLVEGLOBALCONTROL_NONE _DISSOLVEMAPPINGTYPE_NORMAL _DISSOLVEMASKCOUNT_ONE
+  m_ShaderKeywords: _ _DISSOLVEALPHASOURCE_CUSTOM_MAP _DISSOLVEMAPPINGTYPE_NORMAL
     _DISSOLVEMASK_NONE _EMISSIVE_SIMPLE _IS_ANGELRING_OFF _IS_CLIPPING_OFF _IS_OUTLINE_CLIPPING_NO
     _OUTLINE_NML
   m_LightmapFlags: 4
@@ -44,6 +43,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ClippingMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -53,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveMap1:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: fd1dc4bfebdc60c4dba7febfdd078109, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveMap2:
@@ -64,12 +67,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Emissive_Tex:
+    - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _FalloffSampler:
-        m_Texture: {fileID: 2800000, guid: a1d5b2277eb3f6245900378e6fa97575, type: 3}
+    - _Emissive_Tex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HighColor_Tex:
@@ -77,10 +80,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 7521661d2d6cebb479dea03e7336e5de, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: -0}
+        m_Offset: {x: 0, y: 0}
     - _MatCap_Sampler:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -92,16 +99,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OutlineTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Outline_Sampler:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _RimLightSampler:
-        m_Texture: {fileID: 2800000, guid: a18067604964b5a4d8fd5552ed0d789e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Set_1st_ShadePosition:
@@ -128,38 +135,50 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _1st2nd_Shades_Feather: 0.0001
-    - _1st_ShadeColor_Feather: 0.0001
-    - _1st_ShadeColor_Step: 0.5
-    - _2nd_ShadeColor_Feather: 0.0001
-    - _2nd_ShadeColor_Step: 0
+    - _1st2nd_Shades_Feather: 0.068
+    - _1st_ShadeColor_Feather: 0.055
+    - _1st_ShadeColor_Step: 0.766
+    - _2nd_ShadeColor_Feather: 0.068
+    - _2nd_ShadeColor_Step: 0.355
     - _ARSampler_AlphaOn: 0
     - _AR_OffsetU: 0
     - _AR_OffsetV: 0.3
     - _Add_Antipodean_RimLight: 0
+    - _AlphaClip: 0
     - _AngelRing: 0
     - _Ap_RimLight_FeatherOff: 0
     - _Ap_RimLight_Power: 0.1
     - _AutoRenderQueue: 1
-    - _BaseColor_Step: 0.5
-    - _BaseShade_Feather: 0.0001
+    - _BaseColor_Step: 0.766
+    - _BaseShade_Feather: 0.055
     - _Base_Speed: 0
+    - _Blend: 0
+    - _BlendOp: 0
     - _BlurLevelMatcap: 0
     - _BlurLevelSGM: 0
     - _BumpScale: 1
     - _BumpScaleMatcap: 1
+    - _CameraFadingEnabled: 0
+    - _CameraFarFadeDistance: 2
+    - _CameraNearFadeDistance: 1
     - _CameraRolling_Stabilizer: 0
     - _ClippingMode: 0
-    - _Clipping_Level: 0
+    - _Clipping_Level: 0.554
+    - _ColorMode: 0
     - _ColorShift_Speed: 0
+    - _Cull: 2
     - _CullMode: 2
     - _Cutoff: 0.5
-    - _DissolveAlphaSource: 0
+    - _DissolveAlphaSource: 1
     - _DissolveAlphaSourceTexturesUVSet: 0
     - _DissolveCombineWithMasterNodeAlpha: 0
     - _DissolveCombineWithMasterNodeColor: 0
-    - _DissolveCutoff: 0.25
+    - _DissolveCutoff: 0
     - _DissolveEdgeColorIntensity: 0
     - _DissolveEdgeDistortionSource: 0
     - _DissolveEdgeDistortionStrength: 0
@@ -170,7 +189,7 @@ Material:
     - _DissolveEdgeTexturePhaseOffset: 0
     - _DissolveEdgeTextureReverse: 0
     - _DissolveEdgeTextureSource: 0
-    - _DissolveEdgeWidth: 0.15
+    - _DissolveEdgeWidth: 0.023
     - _DissolveGIMultiplier: 1
     - _DissolveGlobalControl: 0
     - _DissolveMainMapTiling: 1
@@ -182,19 +201,30 @@ Material:
     - _DissolveMap3Intensity: 1
     - _DissolveMappingType: 0
     - _DissolveMask: 0
-    - _DissolveMaskAxis: 0
+    - _DissolveMaskAxis: 1
     - _DissolveMaskCount: 0
-    - _DissolveMaskInvert: 1
-    - _DissolveMaskOffset: 0
+    - _DissolveMaskInvert: -1
+    - _DissolveMaskOffset: 0.76
     - _DissolveMaskRadius: 1
     - _DissolveMaskSpace: 0
-    - _DissolveNoiseStrength: 0.1
+    - _DissolveNoiseStrength: 0.22
     - _DissolveSourceAlphaTexturesBlend: 0
     - _DissolveTriplanarMappingSpace: 0
+    - _DistortionBlend: 0.5
+    - _DistortionEnabled: 0
+    - _DistortionStrength: 1
+    - _DistortionStrengthScaled: 0.1
+    - _DstBlend: 0
     - _EMISSIVE: 0
-    - _FalloffPower: 1
+    - _EnvironmentReflections: 1
     - _Farthest_Distance: 100
+    - _FlipbookBlending: 0
+    - _FlipbookMode: 0
     - _GI_Intensity: 0
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossinessSource: 0
+    - _GlossyReflections: 0
     - _HighColor_Power: 0
     - _Inverse_Clipping: 0
     - _Inverse_MatcapMask: 0
@@ -222,6 +252,7 @@ Material:
     - _Is_NormalMapToHighColor: 0
     - _Is_NormalMapToRimLight: 0
     - _Is_Ortho: 0
+    - _Is_OutlineSizeFix: 0
     - _Is_OutlineTex: 0
     - _Is_PingPong_Base: 0
     - _Is_SpecularToHighColor: 0
@@ -231,17 +262,22 @@ Material:
     - _Is_ViewShift: 0
     - _LightDirection_MaskOn: 0
     - _MatCap: 0
+    - _Metallic: 0
+    - _Mode: 0
     - _Nearest_Distance: 0.5
     - _OUTLINE: 0
+    - _OcclusionStrength: 1
     - _Offset_X_Axis_BLD: -0.05
     - _Offset_Y_Axis_BLD: 0.09
     - _Offset_Z: 0
     - _Outline_MaxWidth: 1
-    - _Outline_Width: 0
-    - _PerspectiveRemovalAmount: 1
+    - _Outline_Width: 10
+    - _PerspectiveRemovalAmount: 0
     - _PerspectiveRemovalEndHeight: 100
-    - _PerspectiveRemovalRadius: 3
+    - _PerspectiveRemovalRadius: 100
     - _PerspectiveRemovalStartHeight: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _RimLight: 0
     - _RimLight_FeatherOff: 0
     - _RimLight_InsideMask: 0.0001
@@ -254,13 +290,24 @@ Material:
     - _Scroll_EmissiveU: 0
     - _Scroll_EmissiveV: 0
     - _Set_SystemShadowsToBase: 1
-    - _ShadeColor_Step: 0
+    - _ShadeColor_Step: 0.355
+    - _Shininess: 0
+    - _Smoothness: 0.5
+    - _SmoothnessSource: 0
+    - _SmoothnessTextureChannel: 0
+    - _SoftParticlesEnabled: 0
+    - _SoftParticlesFarFadeDistance: 1
+    - _SoftParticlesNearFadeDistance: 0
+    - _SpecSource: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
     - _StencilComp: 0
     - _StencilMode: 0
     - _StencilNo: 1
     - _StencilOpFail: 0
     - _StencilOpPass: 0
     - _StepOffset: 0
+    - _Surface: 0
     - _TransparentEnabled: 0
     - _TweakHighColorOnShadow: 0
     - _TweakMatCapOnShadow: 0
@@ -271,12 +318,14 @@ Material:
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
     - _Tweak_SystemShadowsLevel: 0
-    - _Tweak_transparency: 0
+    - _Tweak_transparency: 1
     - _Unlit_Intensity: 1
     - _Use_1stAs2nd: 0
     - _Use_BaseAs1st: 0
-    - _ZOffset: 1
+    - _WorkflowMode: 1
+    - _ZOffset: 0
     - _ZOverDrawMode: 0
+    - _ZWrite: 1
     - _ZWriteMode: 1
     - _simpleUI: 0
     - _utsTechnique: 0
@@ -284,11 +333,13 @@ Material:
     - _utsVersionY: 2
     - _utsVersionZ: 0
     m_Colors:
-    - _1st_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
-    - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _1st_ShadeColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
+    - _2nd_ShadeColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
+    - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorShift: {r: 0, g: 0, b: 0, a: 1}
     - _DissolveEdgeColor: {r: 0, g: 1, b: 0, a: 1}
@@ -298,11 +349,26 @@ Material:
     - _DissolveMaskNormal: {r: 1, g: 0, b: 0, a: 0}
     - _DissolveMaskPosition: {r: 0, g: 0, b: 0, a: 0}
     - _Dissolve_ObjectWorldPos: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
-    - _HeadBonePositionWS: {r: 0, g: 1, b: 1, a: 1}
+    - _HeadBonePositionWS: {r: 0, g: 0, b: 1, a: 0}
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Outline_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ShadowColor: {r: 0.8, g: 0.8, b: 1, a: 1}
+    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _ViewShift: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &2936851357831933880
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1

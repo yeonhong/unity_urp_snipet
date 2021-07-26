@@ -50,10 +50,11 @@ float4 perspectiveRemoval(float4 pos) {
 	u_xlat16_5 = u_xlat16_5 / u_xlat16_11;
 	u_xlat16_5 = clamp(u_xlat16_5, 0.0, 1.0);
 	u_xlat18 = u_xlat18 * u_xlat16_5;
-	u_xlat0.xy *= u_xlat18;
-	u_xlat0.xy += u_xlat2.xy;
+	
+	u_xlat0.xy = u_xlat0.xy * u_xlat18.xx + u_xlat2.xy;
 
 	pos.xy = (unity_OrthoParams.w == 1.0) ? u_xlat2.xy : u_xlat0.xy;
 	pos.zw = u_xlat2.zw;
+
 	return pos;
 }
