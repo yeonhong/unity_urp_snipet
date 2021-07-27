@@ -238,9 +238,9 @@ Material:
     - _Offset_Z: 0
     - _Outline_MaxWidth: 1
     - _Outline_Width: 0
-    - _PerspectiveRemovalAmount: 1
-    - _PerspectiveRemovalEndHeight: 100
-    - _PerspectiveRemovalRadius: 3
+    - _PerspectiveRemovalAmount: 0
+    - _PerspectiveRemovalEndHeight: 2
+    - _PerspectiveRemovalRadius: 100
     - _PerspectiveRemovalStartHeight: 0
     - _RimLight: 0
     - _RimLight_FeatherOff: 0
@@ -276,7 +276,7 @@ Material:
     - _Unlit_Intensity: 1
     - _Use_1stAs2nd: 0
     - _Use_BaseAs1st: 0
-    - _ZOffset: 1
+    - _ZOffset: 0
     - _ZOverDrawMode: 1
     - _ZWriteMode: 0
     - _simpleUI: 0

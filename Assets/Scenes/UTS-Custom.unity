@@ -1623,10 +1623,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 7425847673352302147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ac034a4f6d2e5342a8f64442db3d478, type: 3}
+  m_Script: {fileID: 11500000, guid: fd50f7270c03fa743a0e1fccd66bc6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tHead: {fileID: 7425847673352401877}
+  attachmentRendererList: []
+  perspectiveRemovalAmount: 0
+  perspectiveRemovalRadius: 1
+  perspectiveRemovalStartHeight: 0
+  perspectiveRemovalEndHeight: 1
+  customCharacterBoundCenter: {fileID: 0}
+  characterBoundRadius: 1
+  showBoundingSphereGizmo: 1
+  headBoneTransform: {fileID: 0}
+  faceForwardDirection: 2
+  faceNormalFixAmount: 1
+  showFaceForwardDirectionGizmo: 1
+  allRenderers:
+  - {fileID: 7425847673355477729}
+  - {fileID: 7425847673355477739}
+  - {fileID: 7425847673355477639}
+  - {fileID: 7425847673355477737}
+  - {fileID: 7425847673355477753}
+  - {fileID: 7425847673355477743}
+  - {fileID: 7425847673355477759}
+  - {fileID: 7425847673355477733}
+  - {fileID: 7425847673355477633}
+  - {fileID: 7425847673355477745}
+  - {fileID: 7425847673355477757}
+  - {fileID: 7425847673355477735}
+  - {fileID: 7425847673355477731}
+  - {fileID: 7425847673355477747}
+  - {fileID: 7425847673355477749}
+  - {fileID: 7425847673354301729}
+  - {fileID: 7425847673355477741}
+  - {fileID: 7425847673355477635}
+  - {fileID: 7425847673354301733}
+  - {fileID: 7425847673354301735}
+  - {fileID: 7425847673354301731}
+  - {fileID: 7425847673355477755}
 --- !u!1 &7425847673352302149
 GameObject:
   m_ObjectHideFlags: 0

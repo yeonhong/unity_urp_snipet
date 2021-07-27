@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7735011504499021810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9fe1b83ad2c2cd4192334bd2840f268, type: 3}
+  m_Name: NewNiloToonAllInOneRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
 --- !u!114 &-5229381596380435792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,7 +69,8 @@ MonoBehaviour:
   - {fileID: 9120039119417548041}
   - {fileID: -5229381596380435792}
   - {fileID: 1311819609337291148}
-  m_RendererFeatureMap: fe05f499bac90ee4099d8c5242e3907eb06ac70025816db78ce1f0fffb843412
+  - {fileID: -7735011504499021810}
+  m_RendererFeatureMap: fe05f499bac90ee4099d8c5242e3907eb06ac70025816db78ce1f0fffb8434120ea8c6bc04b8a794
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   shaders:
     blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
@@ -91,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: OutlineMultipass
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     passTag: OutlineMultipass
     Event: 500
@@ -133,4 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c21277867425a564a83bed97047db5c3, type: 3}
   m_Name: DepthNormalsFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
